@@ -9,3 +9,8 @@ Homestead.yaml
 
 Vagrantfile
 /.vagrant
+after\.sh
+
+aliases
+
+composer\.json
