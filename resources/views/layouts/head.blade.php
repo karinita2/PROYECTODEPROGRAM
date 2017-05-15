@@ -540,8 +540,8 @@
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="mailbox.html">Mailbox</a></li>
-                            <li><a href="search.html">Search</a></li>
+                            <li><a href="{{ url('/reservation') }}">Registrar</a></li>
+                            <li><a href="search.html">Lista</a></li>
                             <li><a href="todo.html">Todo</a></li>
                         </ul>
                     </div>
@@ -617,6 +617,7 @@
 <script src="assets/plugins/waypoints/jquery.waypoints.min.js"></script>
 <script src="assets/plugins/counter-up-master/jquery.counterup.min.js"></script>
 <script src="assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 <script src="assets/plugins/chart.js/chart.min.js"></script>
 <script src="assets/plugins/flot/jquery.flot.min.js"></script>
 <script src="assets/plugins/flot/jquery.flot.time.min.js"></script>
