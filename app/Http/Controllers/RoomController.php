@@ -9,17 +9,11 @@ class RoomController extends Controller
 {
     public function index()
     {
-
-
-
         $rooms = DB::table('rooms')
             ->join('packs', 'packs.id_pack', '=', 'rooms.pack_id')
             ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
             ->get();
         return view('room.room',compact('rooms'));
-
-        //
-
     }
     public function create()
     {

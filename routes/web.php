@@ -22,4 +22,4 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/room','RoomController@index');
 
-Route::get('/users', 'HomeController@users');
+Route::get('/user', 'UserController@index');

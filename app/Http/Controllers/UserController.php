@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class LoginController extends Controller
+use DB;
+class UserController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view('login.index');
+        $users = DB::table('users')
+            ->join('people', 'people.id_person', '=', 'users.person_id')
+            ->join('roles', 'roles.id_role', '=', 'users.role_id')
+            ->get();
+        return view('user.read', compact('users'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
