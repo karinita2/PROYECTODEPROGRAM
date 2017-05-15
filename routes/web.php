@@ -21,3 +21,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/room','RoomController@index');
+
+Route::get('/users', 'HomeController@users');
