@@ -21,24 +21,13 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="apelllido_paterno" class="col-sm-4 control-label">Apellido paterno</label>
+                                            <label for="apellido" class="col-sm-4 control-label">Apellido completo (*) </label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="{{ old('apellido_paterno') }}" >
+                                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old('apellido') }}" >
                                                 <div class="form-control-line"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="apelllido_materno" class="col-sm-4 control-label">Apellido materno</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="{{ old('apellido_materno') }}">
-                                                <div class="form-control-line"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('nombres') ? ' has-error' : '' }}">
                                             <label for="nombres" class="col-md-4 control-label">Nombre completo (*)</label>
@@ -53,7 +42,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('nacionalidad') ? ' has-error' : '' }}">
+                                            <label for="nombres" class="col-md-4 control-label">Nacionalidad(*)</label>
+                                            <div class="col-md-8">
+                                                <input id="name" type="text" class="form-control" name="nacionalidad" value="{{ old('nacionalidad') }}" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')" >
+                                                <div class="form-control-line"></div>
+                                                @if ($errors->has('nacionalidad'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('nacionalidad') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-sm-6">
                                         <div class="form-group {{ $errors->has('fecha_nacimiento') ? ' has-error ' : '' }}">
                                            <label for="fecha_nacimiento" class="col-sm-4 control-label">Fecha nacimiento (*)</label>
                                             <div class="col-sm-8">
@@ -66,18 +71,10 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="Firstname5" class="col-sm-4 control-label">Carnet de identidad</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="carnet" name="carnet" value="{{ old('carnet') }}">
-                                                <div class="form-control-line"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="celular" class="col-sm-4 control-label">Telefono</label>
@@ -89,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <!--<div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="direccion" class="col-sm-4 control-label">Dirección</label>
                                             <div class="col-sm-8">
@@ -97,13 +94,17 @@
                                                 <div class="form-control-line"></div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="foto" class="col-sm-4 control-label">Foto (*)</label>
+                                            <label for="sexo" class="col-sm-4 control-label">Sexo (*)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="foto" name="foto">
-                                                <div class="form-control-line"></div>
+                                                <select id="sexo" name="sexo" class="form-control">
+                                                    <option value="" disabled>&nbsp;</option>
+                                                    <option value="masculino">masculino</option>
+                                                    <option value="femenino">femenino</option>
+                                                </select>
+                                                <label for="select2"></label>
                                             </div>
                                         </div>
                                     </div>

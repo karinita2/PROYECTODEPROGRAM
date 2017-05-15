@@ -83,8 +83,8 @@
                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
                         <img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
                         <span class="profile-info">
-									{{ Auth::user()->name }}
-									<small>{{ Auth::user()->tipo_usuario }}</small>
+									{{ Auth::user()->email }}
+								<!--	<small>{{ Auth::user()->tipo_usuario }}</small>-->
 								</span>
                     </a>
                     <ul class="dropdown-menu animation-dock">

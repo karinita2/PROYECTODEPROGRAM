@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Persona;
+use App\Person;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -50,8 +50,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'nombres'               => 'required|min:3',
-            'fecha_nacimiento'      => 'required|date',
-            'name'                  => 'required|max:255',
             'email'                 => 'required|email|max:255|unique:users',
             'password'              => 'required|min:6|confirmed',
         ]);
@@ -65,24 +63,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $persona = Persona::create([
-            'apellido_paterno'      => $data['apellido_paterno'],
-            'apellido_materno'      => $data['apellido_materno'],
-            'nombres'               => $data['nombres'],
-            'fecha_nacimiento'      => $data['fecha_nacimiento'],
-            'carnet'                => $data['carnet'],
-            'celular'               => $data['celular'],
-            'direccion'             => $data['direccion'],
-            'foto'                  => $data['foto'],
+        $persona = Person::create([
+            'name'                  => $data['nombres'],
+            'last_name'             => $data['apellido'],
+            'phone'                 => $data['celular'],
+            'sex'                   => $data['sexo'],
+            'nationality'           => $data['nacionalidad'],
+            #'carnet'                => $data['carnet'],
+            #'direccion'             => $data['direccion'],
+            #'foto'                  => $data['foto'],
         ]);
 
-        $model = Persona::all()->last();
+        $model = Person::all()->last();
+        $role = 1;
         return User::create([
-            'name'              => $data['name'],
+            #'name'              => $data['name'],
             'email'             => $data['email'],
             'password'          => bcrypt($data['password']),
-            'persona_id'        => $model->id_persona,
-            'tipo_usuario'      => $data['tipo'],
+            'role_id'           => $role,
+            'person_id'        => $model->id_person,
         ]);
     }
 }
