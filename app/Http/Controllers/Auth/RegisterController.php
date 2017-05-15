@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Persona;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -48,9 +49,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'nombres'               => 'required|min:3',
+            'fecha_nacimiento'      => 'required|date',
+            'name'                  => 'required|max:255',
+            'email'                 => 'required|email|max:255|unique:users',
+            'password'              => 'required|min:6|confirmed',
         ]);
     }
 
@@ -62,10 +65,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $persona = Persona::create([
+            'apellido_paterno'      => $data['apellido_paterno'],
+            'apellido_materno'      => $data['apellido_materno'],
+            'nombres'               => $data['nombres'],
+            'fecha_nacimiento'      => $data['fecha_nacimiento'],
+            'carnet'                => $data['carnet'],
+            'celular'               => $data['celular'],
+            'direccion'             => $data['direccion'],
+            'foto'                  => $data['foto'],
+        ]);
+
+        $model = Persona::all()->last();
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name'              => $data['name'],
+            'email'             => $data['email'],
+            'password'          => bcrypt($data['password']),
+            'persona_id'        => $model->id_persona,
+            'tipo_usuario'      => $data['tipo'],
         ]);
     }
 }
