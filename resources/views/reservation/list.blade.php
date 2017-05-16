@@ -1,4 +1,9 @@
 @extends('layouts.head')
+@section('css')
+    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+    <link href="assets/plugins/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+@endsection
 @section('middle-content')
     <div class="row">
         <div class="col s12">
@@ -52,4 +57,16 @@
         </div>
     </div>
 
-    @endsection
+@endsection
+@section('js')
+    <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+    <script src="assets/plugins/materialize/js/materialize.min.js"></script>
+    <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+    <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+    <script src="assets/plugins/google-code-prettify/prettify.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="assets/js/alpha.min.js"></script>
+    <script src="assets/js/ajax_users.js"></script>
+
+    <!--<script src="assets/js/pages/miscellaneous-sweetalert.js"></script>-->
+@endsection

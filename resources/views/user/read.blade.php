@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Lista de usuarios</span>
-
+                    <a class="waves-effect waves-light btn m-b-xs"><i class="material-icons left">cloud</i>Registrar Usuario</a>
                     <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="browser-default"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div><div id="example_filter" class="dataTables_filter"><label><input type="search" class="" placeholder="Search records" aria-controls="example"></label></div><table id="example" class="display responsive-table datatable-example dataTable" role="grid" aria-describedby="example_info">
                             <thead>
                             <tr role="row">
