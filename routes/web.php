@@ -23,12 +23,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/room','RoomController@index');
 
-<<<<<<< HEAD
-
 Route::get('/user', 'UserController@index');
 Route::resource('user', 'UserController');
-=======
-Route::get('/user', 'UserController@index');
 
 Route::get('/reservation','ReservationController@index');
->>>>>>> master
