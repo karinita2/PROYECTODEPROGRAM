@@ -1,14 +1,20 @@
 @extends('layouts.head')
+@section('css')
+    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+    <link href="assets/plugins/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+@endsection
 @section('middle-content')
     <div class="row">
         <div class="col s12">
-            <div class="page-title">Data Tables</div>
+            <div class="page-title">Habitaciones</div>
         </div>
         <div class="col s12 m12 l12">
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Basic</span>
-                    <p>DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code></p><br>
+                    <br>
+
                     <table id="example" class="display responsive-table datatable-example">
                         <thead>
                         <tr>
@@ -28,9 +34,16 @@
                                 <td>{{ $key->room_type }}</td>
                                 <td>{{ $key->availability }}</td>
                                 <td>
-                                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                                    <button class="btn btn-warning btn-detail view-modal"
+                                            data-id_room        = "{{ $key->id_room }}"
+                                            data-pack           = "{{ $key->pack}}"
+                                            data-room_type      = "{{ $key->room_type }}"
+                                            data-availability   = "{{ $key->availability }}">
+                                        <i class="material-icons dp48">Ver</i>
+                                    </button>
                                 </td>
                             </tr>
+                            @extends('modals.viewroom')
                         @endforeach
                         </tbody>
                     </table>
@@ -40,4 +53,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+    <script src="assets/plugins/materialize/js/materialize.min.js"></script>
+    <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+    <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+    <script src="assets/plugins/google-code-prettify/prettify.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="assets/js/alpha.min.js"></script>
+    <script src="assets/js/ajax_users.js"></script>
+
+    <!--<script src="assets/js/pages/miscellaneous-sweetalert.js"></script>-->
 @endsection
