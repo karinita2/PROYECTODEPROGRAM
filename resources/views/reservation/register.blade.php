@@ -56,7 +56,7 @@
                                 </div>
 
                             <div class="input-field col s12 m6 l6">
-                                <i class="material-icons prefix">my_location</i>
+                                <i class="material-icons prefix">location_on</i>
                                 <div class="select-wrapper">
                                     <select class="initialized">
                                         <option value="" disabled="" selected="">Nacionalidad</option>
@@ -354,6 +354,13 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div id="main">
+                                    <input type="button" id="btAdd" value="Añadir Elemento" class="bt" />
+                                    <input type="button" id="btRemove" value="Eliminar Elemento" class="bt" />
+                                    <input type="button" id="btRemoveAll" value="Eliminar Todo" class="bt" /><br />
+                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -372,7 +379,6 @@
                 </div>
             </div>
         </div>
-    <script src="assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 
 
 @endsection

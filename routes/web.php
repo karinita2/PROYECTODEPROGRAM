@@ -25,3 +25,5 @@ Route::get('/room','RoomController@index');
 Route::get('/user', 'UserController@index');
 
 Route::get('/reservation','ReservationController@index');
+
+Route::get('/list','ListController@index');
