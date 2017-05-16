@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePacksTable extends Migration
+class CreatePreferecialTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('packs', function (Blueprint $table) {
-            $table->increments('id_pack');
-            $table->string('pack');
-            $table->float('price');
+        Schema::create('preferencial', function (Blueprint $table) {
+            $table->increments('id_preferencial');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreatePacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packs');
+        Schema::dropIfExists('preferencial');
     }
 }

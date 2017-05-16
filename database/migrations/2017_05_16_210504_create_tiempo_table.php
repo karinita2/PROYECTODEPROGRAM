@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBusinessesTable extends Migration
+class CreateTiempoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBusinessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('businesses', function (Blueprint $table) {
-            $table->increments('id_business');
-            $table->string('business_name');
-            $table->string('business_type');
+        Schema::create('tiempo', function (Blueprint $table) {
+            $table->increments('id_tiempo');
+            $table->integer('reservation_id')->unsigned();
+            $table->foreign('reservation_id')->references('id_reservation')->on('reservations');
+            $table->date('plazo');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateBusinessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('businesses');
+        Schema::dropIfExists('tiempo');
     }
 }
