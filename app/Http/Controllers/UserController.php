@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Person;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 class UserController extends Controller
@@ -83,6 +85,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        Person::where('id_person',$id)->delete();
+
+        return redirect()->back();
     }
 }
