@@ -27,3 +27,5 @@ Route::get('/user', 'UserController@index');
 Route::resource('user', 'UserController');
 
 Route::get('/reservation','ReservationController@index');
+
+Route::get('/list','ListController@index');
