@@ -20,6 +20,7 @@ class CreatePeopleTable extends Migration
             $table->string('phone');
             $table->string('sex');
             $table->string('nationality');
+            $table->string('ndi');
             $table->timestamps();
         });
     }

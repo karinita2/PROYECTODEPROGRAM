@@ -27,7 +27,7 @@ class AddPersonIdToCreditCard extends Migration
     public function down()
     {
         Schema::table('credit_cards', function (Blueprint $table) {
-            //
+
         });
     }
 }
