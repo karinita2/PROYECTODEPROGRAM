@@ -14,9 +14,10 @@
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+    <link href="assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet">
     <link href="assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet">
-
 
     <!-- Theme Styles -->
     <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
@@ -626,8 +627,10 @@
 <script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script>
 <script src="assets/plugins/curvedlines/curvedLines.js"></script>
 <script src="assets/plugins/peity/jquery.peity.min.js"></script>
+<script src="assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/alpha.min.js"></script>
 <script src="assets/js/pages/dashboard.js"></script>
+<script src="assets/js/pages/table-data.js"></script>
 
 </body>
 </html>
