@@ -40,7 +40,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = DB::table('users')
+            ->join('people', 'people.id_person', '=', 'users.person_id')
+            ->join('roles', 'roles.id_role', '=', 'users.role_id')
+            ->find ($request->id);
+
+        $user->id           = $request->id;
+        $user->email        = $request->email;
+        $user->role         = $request->
+        $user->save();
+        return response()->json($user);
     }
 
     /**
@@ -60,9 +69,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+
+        $person = Person::find($request->id_person);
+        $person->name       = $request->name;
+        $person->last_name  = $request->last_name;
+        $person->phone      = $request->phone;
+        $person->sex        = $request->sex;
+        $person->nationality= $request->nationality;
+        $person->save();
+        return response()->json($person);
     }
 
     /**
@@ -89,5 +106,12 @@ class UserController extends Controller
         Person::where('id_person',$id)->delete();
 
         return redirect()->back();
+    }
+
+    public function deleteUser(Request $request)
+    {
+        User::find($request->id)->delete();
+        Person::where('id_person',$request->id_person)->delete();
+        return response()->json();
     }
 }

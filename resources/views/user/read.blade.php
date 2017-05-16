@@ -21,30 +21,47 @@
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Nombre</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 200px;">Apellido</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 122px;">Telefono</th>
-                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 150px;">Correo</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 150px;">Nacionalidad</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 100px;">Opciones</th>
                             </tr>
+                            {{ csrf_field() }}
                             </thead>
                             <tbody>
+                            <?php $no=1; ?>
                                 @foreach($users as $user)
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">{{ $user->id }}</td>
+                                    <tr role="row" class="odd item{{$user->id_person}}">
+                                        <td class="sorting_1">{{ $user->id_person }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->last_name }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->nationality }}</td>
                                         <td>
-                                            {!! Form::open(['route' => ['user.destroy', $user->id], 'method' => 'delete','class'=>'delete_form']) !!}
-                                            <a class="waves-effect waves-light btn blue modal-trigger" href="#modal2"><i class="material-icons dp48">settings</i></a>
-                                            <button class="waves-effect waves-light btn red sweetalert-cancel delete-btn"><i class="material-icons dp48">delete</i></button>
-                                            {!! Form::close() !!}
+                                            <button class="btn btn-warning btn-detail edit-modal"
+                                                    data-id_person      = "{{ $user->id_person }}"
+                                                    data-name           = "{{ $user->name}}"
+                                                    data-last_name      = "{{ $user->last_name }}"
+                                                    data-phone          = "{{ $user->phone }}"
+                                                    data-sex            = "{{ $user->sex }}"
+                                                    data-nationality    = "{{ $user->nationality }}">
+                                                <i class="material-icons dp48">settings</i>
+                                            </button>
+                                            {{-- !! Form::open(['route' => ['user.destroy', $user->id_person], 'method' => 'delete','class'=>'delete_form']) !! --}}
+                                            <!--<button class="waves-effect waves-light btn red sweetalert-cancel delete-btn"><i class="material-icons dp48">delete</i></button>-->
+                                            {{--!! Form::close() !!--}}
+
+                                            <button class="waves-effect waves-light btn red delete-modal"
+                                                    data-id             = "{{ $user->id }}"
+                                                    data-id_person      = "{{ $user->id_person }}"
+                                                    data-name           = "{{ $user->name}}">
+                                                <i class="material-icons dp48">delete</i>
+                                            </button>
                                         </td>
                                     </tr>
                                     @extends('modals.edit')
-
+                                    @extends('modals.delete')
                                 @endforeach
                             </tbody>
-                            <br>
+
                         </table>
                         <br>
                         <div class="dataTables_info" id="example_info" role="status" aria-live="polite"></div>
@@ -81,6 +98,7 @@
     <script src="assets/plugins/google-code-prettify/prettify.js"></script>
     <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="assets/js/alpha.min.js"></script>
+    <script src="assets/js/ajax_users.js"></script>
     <script type="text/javascript">
         $('button.delete-btn').on('click', function(e){
             e.preventDefault();

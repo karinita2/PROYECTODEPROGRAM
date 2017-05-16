@@ -82,7 +82,7 @@
                     </a>
                 </section>
                 <div class="header-title col s3 m3">
-                    <span class="chapter-title">Alpha</span>
+                    <span class="chapter-title">Sistema de Reservas</span>
                 </div>
                 <form class="left search col s6 hide-on-small-and-down">
                     <div class="input-field">
@@ -547,7 +547,7 @@
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="{{ url('/reservation') }}">Registrar</a></li>
-                            <li><a href="search.html">Lista</a></li>
+                            <li><a href="{{ url('/list') }}">Lista</a></li>
                             <li><a href="todo.html">Todo</a></li>
                         </ul>
                     </div>
@@ -601,11 +601,9 @@
             </div>
             <div class="footer-r white">&nbsp;</div>
             <div class="footer-grid-r white">
-                <a class="footer-text" href="mailbox.html">
-                    <i class="material-icons arrow-r">arrow_forward</i>
-                    <span class="direction">Next</span>
+                <a class="footer-text" href="#">
                     <div>
-                        Mailbox app
+                        Reservas
                     </div>
                 </a>
             </div>

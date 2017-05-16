@@ -23,7 +23,15 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/room','RoomController@index');
 
-Route::get('/user', 'UserController@index');
+/** Eliminar */
+// Route::get('/user', 'UserController@index');
+
 Route::resource('user', 'UserController');
 
+Route::post('/editUser', 'UserController@edit');
+Route::post('/addUser', 'UserController@store');
+Route::post('/deleteUser', 'UserController@deleteUser');
+
 Route::get('/reservation','ReservationController@index');
+
+Route::get('/list','ListController@index');
