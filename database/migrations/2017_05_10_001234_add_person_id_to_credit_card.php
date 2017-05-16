@@ -27,7 +27,7 @@ class AddPersonIdToCreditCard extends Migration
     public function down()
     {
         Schema::table('credit_cards', function (Blueprint $table) {
-
+            $table->dropForeign('credit_cards_person_id_foreign');
         });
     }
 }

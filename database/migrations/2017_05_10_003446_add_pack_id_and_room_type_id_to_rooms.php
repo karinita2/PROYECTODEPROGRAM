@@ -27,7 +27,7 @@ class AddPackIdAndRoomTypeIdToRooms extends Migration
     public function down()
     {
         Schema::table('rooms', function (Blueprint $table) {
-            //
+            $table->dropForeign('rooms_room_type_id_foreign');
         });
     }
 }

@@ -29,7 +29,8 @@ class AddServiceIdAndDetailIdToServicesDetails extends Migration
     public function down()
     {
         Schema::table('services_details', function (Blueprint $table) {
-            //
+            $table->dropForeign('services_details_service_id_foreign');
+            $table->dropForeign('services_details_detail_id_foreign');
         });
     }
 }

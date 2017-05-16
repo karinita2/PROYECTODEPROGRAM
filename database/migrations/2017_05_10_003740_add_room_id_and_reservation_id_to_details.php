@@ -29,7 +29,8 @@ class AddRoomIdAndReservationIdToDetails extends Migration
     public function down()
     {
         Schema::table('details', function (Blueprint $table) {
-            //
+            $table->dropForeign('details_room_id_foreign');
+            $table->dropForeign('details_reservation_id_foreign');
         });
     }
 }
