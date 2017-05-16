@@ -21,13 +21,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    /*
+     * La funcion index muestra la pantalla inicial
+     * al iniciar sesion en el sistema.
+     * */
     public function index()
     {
         return view('home');
     }
 
-    public function users()
-    {
-        return view('users');
-    }
 }

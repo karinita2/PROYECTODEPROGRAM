@@ -3,7 +3,7 @@ $( document ).ready(function() {
     $('pre').addClass('prettyprint');
     prettyPrint();
     
-    document.querySelector('.sweetalert-basic').onclick = function(){
+    /*document.querySelector('.sweetalert-basic').onclick = function(){
         swal("Here's a message!");
     };
     document.querySelector('.sweetalert-text').onclick = function(){
@@ -24,23 +24,23 @@ $( document ).ready(function() {
         }, function(){  
             swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
         });
-    };
+    };*/
     document.querySelector('.sweetalert-cancel').onclick = function(){
         swal({   
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
+            title: "Esta seguro?",
+            text: "No podrá recuperar este dato.",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel plx!",
+            confirmButtonText: "Sí, Borrar!",
+            cancelButtonText: "No, Cancelar!",
             closeOnConfirm: false,
             closeOnCancel: false 
         }, function(isConfirm){
             if (isConfirm) {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                swal("Eliminado!", "Se ha eliminado corrrectamente", "success");
             } else {
-                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                swal("Cancelado", "No se ha eliminado este dato. :)", "error");
             }
         });
     };
