@@ -15,8 +15,8 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id_room');
+            $table->string('name');
             $table->enum('availability',['blocked', 'available', 'check-in', 'check-out', 'reserved'] );
-
             $table->timestamps();
         });
     }

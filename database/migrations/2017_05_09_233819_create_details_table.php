@@ -15,7 +15,8 @@ class CreateDetailsTable extends Migration
     {
         Schema::create('details', function (Blueprint $table) {
             $table->increments('id_detail');
-            $table->float('cost');
+            $table->float('sub_total');
+            $table->string('cantidad');
             $table->timestamps();
         });
     }

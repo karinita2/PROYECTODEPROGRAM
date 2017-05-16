@@ -17,7 +17,6 @@ class CreateServicesTable extends Migration
             $table->increments('id_service');
             $table->string('service');
             $table->float('price');
-            $table->enum('availability_service',['not_available', 'available'] );
             $table->timestamps();
         });
     }
