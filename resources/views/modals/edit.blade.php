@@ -1,8 +1,8 @@
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="modal2" class="modal bottom-sheet">
     <div class="modal-content">
-        <h4>Eliminar Usuario</h4>
+        <h4>Modal Header</h4>
         <p>A bunch of text</p>
     </div>
     <div class="modal-footer">

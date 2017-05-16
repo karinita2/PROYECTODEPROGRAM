@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', 'LoginController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -23,6 +24,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/room','RoomController@index');
 
 Route::get('/user', 'UserController@index');
+Route::resource('user', 'UserController');
 
 Route::get('/reservation','ReservationController@index');
 
