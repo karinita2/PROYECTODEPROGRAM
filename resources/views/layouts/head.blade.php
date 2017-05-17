@@ -575,15 +575,8 @@
                     </div>
                 </li>
                 <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">desktop_windows</i>Paquetes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="layout-blank.html">Paquete 1</a></li>
-                            <li><a href="layout-boxed.html">Paquete 2</a></li>
-                            <li><a href="layout-hidden-sidebar.html">Paquete 3</a></li>
-                            <li><a href="layout-right-sidebar.html">Paquete 4</a></li>
-                        </ul>
-                    </div>
+                    <a class="collapsible-header waves-effect waves-grey" href="{{ url('/pack') }}"><i class="material-icons">desktop_windows</i>Paquetes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+
                 </li>
             </ul>
             <div class="footer">
