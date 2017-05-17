@@ -1,4 +1,4 @@
-<div id="modal2" class="modal">
+<div id="modal1" class="modal">
     <div class="modal-content">
         <h4><b>EDITAR USUARIO</b></h4>
         <div class="col s12 m12 l6">
@@ -37,6 +37,18 @@
                              </div>
                          </div>-->
                     </form>
+                    <div align='right' class="row">
+                        <div class="col s8">
+                            <div class="page-title">Calendar</div>
+                        </div>
+                        <div class="col s8 m8 l8">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div id="calendar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
