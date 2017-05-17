@@ -102,7 +102,7 @@
                 <ul id="dropdown1" class="dropdown-content notifications-dropdown">
                     <li class="notificatoins-dropdown-container">
                         <ul>
-                            <li class="notification-drop-title">Today</li>
+                            F<li class="notification-drop-title">Today</li>
                             <li>
                                 <a href="#!">
                                     <div class="notification">
