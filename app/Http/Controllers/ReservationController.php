@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Reservations;
+use App\RoomTypes;
 use Illuminate\Http\Request;
-
+use DB;
 class ReservationController extends Controller
 {
-
     public function index()
     {
         return view('reservation.register');
@@ -20,7 +21,25 @@ class ReservationController extends Controller
 
     public function store(Request $request)
     {
-        //
+        if($request->input('role_id') != 1)
+        {
+            $tipo = 'interno';
+        }
+        else
+        {
+            $tipo = 'externo';
+        }
+        $reservation = new Reservations();
+        $reservation->date              =   date('Y-m-d');
+        $reservation->ckechin           =   $request->checkin;
+        $reservation->ckechout          =   $request->checkout;
+        $reservation->type_reservation  =   $tipo;
+        $reservation->total             =   0;
+        $reservation->user_id           =   $request->id;
+        $reservation->save();
+
+        dd('reserva creada');
+
     }
 
 
@@ -43,5 +62,34 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         //
+    }
+    /*
+     * esta funcion nos ayuda a buscar el tipo de habitacion que existe disponible
+     */
+    public function autocomplete(Request $request)
+    {
+        $term = $request->term;
+        $data = RoomTypes::where('room_type','LIKE','%'.$term.'%')
+        ->take(5)
+        ->get();
+        $result = array();
+        foreach ($data as $key => $value)
+        {
+            $result[] = ['value' => $value->room_type.' precio: '.$value->price, 'id'=>$value->id_room_type];
+        }
+        return response()->json($result);
+    }
+    /*
+     * esta funcion ayuda a agregar el tipo de habitacion y almacenarla en la base de datos
+     */
+    public function addReservation(Request $request)
+    {
+        #$roomType = RoomTypes::find($request->tipo_habitacionId);
+        $roomType = DB::table('rooms_types')->where('rooms_types.id_room_type', $request->tipo_habitacionId )
+            ->join('rooms', 'rooms.id_room', '=', 'rooms_types.id_room_type');
+            #->find($request->tipo_habitacionId);
+
+        echo json_encode(array('result' => true, 'roomType' => $roomType));
+
     }
 }

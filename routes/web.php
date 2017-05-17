@@ -32,6 +32,13 @@ Route::post('/editUser', 'UserController@edit');
 Route::post('/addUser', 'UserController@store');
 Route::post('/deleteUser', 'UserController@deleteUser');
 
-Route::get('/reservation','ReservationController@index');
+Route::resource('/reservation','ReservationController');
+Route::post('/reservation/store','ReservationController@store');
+
 
 Route::get('/list','ListController@index');
+
+// ruta de autocomplete
+Route::get('/autocomplete','ReservationController@autocomplete');
+// ruta para adicionar el tipo de habitacion
+Route::post('/addreservation', 'ReservationController@addReservation');
