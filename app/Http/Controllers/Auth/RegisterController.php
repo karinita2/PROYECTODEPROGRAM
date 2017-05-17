@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'phone'                 => $data['celular'],
             'sex'                   => $data['sexo'],
             'nationality'           => $data['nacionalidad'],
+            'ndi'                   => $data['ndi'],
             #'carnet'                => $data['carnet'],
             #'direccion'             => $data['direccion'],
             #'foto'                  => $data['foto'],

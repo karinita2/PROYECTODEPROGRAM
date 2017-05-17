@@ -8,6 +8,6 @@ class Person extends Model
 {
     protected $primaryKey = 'id_person';
     protected $fillable = [
-        'name', 'last_name', 'phone', 'sex', 'nationality',
+        'name', 'last_name', 'phone', 'sex', 'nationality', 'ndi',
     ];
 }

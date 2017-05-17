@@ -86,15 +86,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <!--<div class="col-sm-6">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="direccion" class="col-sm-4 control-label">Dirección</label>
+                                            <label for="ndi" class="col-sm-4 control-label">Documento de identidad</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="direccion" name="direccion" value="{{ old('direccion') }}">
+                                                <input type="text" class="form-control" id="ndi" name="ndi" value="{{ old('ndi') }}">
                                                 <div class="form-control-line"></div>
                                             </div>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="sexo" class="col-sm-4 control-label">Sexo (*)</label>
