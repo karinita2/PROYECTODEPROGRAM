@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" id="password" name="password">
                             <label for="password">Clave</label>
-                            <p class="help-block"><a href="#">recuperar cuenta?</a></p>
+                            <p class="help-block"><a href="#">¿recuperar cuenta?</a></p>
                         </div>
                         <br/>
                         <div class="row">
