@@ -9,13 +9,12 @@
         <div class="col s12">
             <div class="page-title"><h5>Formulario de reservas</h5></div>
         </div>
-        <form class="col s12" action="{{ url('/reservation/store') }}" id="formReservationStore" method="POST">
-            <div class="col s12 m12 l6">
+        <div class="col s12 m6 l6">
+                <form action="{{ url('/reservation/store') }}" id="formReservationStore" method="POST">
                 <div class="card">
                     <div class="card-content">
                         <span class="card-title">Datos Personales</span><br>
                         <div class="row">
-
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="input-field col s12">
@@ -328,9 +327,9 @@
                             <button class="waves-effect waves-light btn green m-b-xs" type="submit"><i class="material-icons left">cloud</i>Aceptar</button>
                         </center>
                     </div>
-            </div>
         </form>
-            <div class="col s12 m12 l6">
+        </div>
+            <div class="col s12 m6 l6">
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Datos de reserva</span><br>
@@ -351,7 +350,7 @@
                             <div class="row">
                                 <form action="{{ url('/addreservation') }}" method="POST" id="formReservation">
                                     {{ csrf_field() }}
-                                    <div class="input-field col s12 m6 l6">
+                                    <div class="input-field col s6 m6 l6">
                                         <i class="material-icons prefix">store</i>
                                         <input id="tipo_habitacion" name="tipo_habitacion" type="text" class="validate">
                                         <input type="hidden" id="tipo_habitacionId" name="tipo_habitacionId">
@@ -424,7 +423,7 @@
                                     success : function (data) {
                                         if (data.result == true )
                                         {
-                                            $("#tableReservation").load('{!! Request::fullUrl() !!} #tableReservation');
+                                            $("#tableReservation").load('{!! Request::url() !!} #tableReservation');
                                             $("#tipo_habitacion").val('').focus('');
                                         }
                                         else

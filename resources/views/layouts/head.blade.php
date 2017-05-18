@@ -550,7 +550,6 @@
                         <ul>
                             <li><a href="{{ url('/reservation') }}">Registrar</a></li>
                             <li><a href="{{ url('/list') }}">Lista</a></li>
-                            <li><a href="todo.html">Todo</a></li>
                         </ul>
                     </div>
                 </li>
@@ -588,7 +587,7 @@
                 </li>
             </ul>
             <div class="footer">
-                <p class="copyright">Steelcoders ©</p>
+                <p class="copyright">Ingenieria de software ©</p>
                 <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
             </div>
         </div>

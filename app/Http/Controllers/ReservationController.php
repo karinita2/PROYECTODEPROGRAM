@@ -84,12 +84,14 @@ class ReservationController extends Controller
      */
     public function addReservation(Request $request)
     {
-        #$roomType = RoomTypes::find($request->tipo_habitacionId);
-        $roomType = DB::table('rooms_types')->where('rooms_types.id_room_type', $request->tipo_habitacionId )
-            ->join('rooms', 'rooms.id_room', '=', 'rooms_types.id_room_type');
-            #->find($request->tipo_habitacionId);
-
-        echo json_encode(array('result' => true, 'roomType' => $roomType));
+        # dd($request->tipo_habitacionId);
+        $type = $request->input('tipo_habitacionId');
+        $roomType = RoomTypes::where('id_room_type',$type)
+        ->get();
+        foreach($roomType as $key)
+        {
+            echo json_encode(array('result' => true, 'roomType' => $key->room_type, 'price' => $key->price, 'cantidad' => $key->cantidad));
+        }
 
     }
 }
