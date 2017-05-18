@@ -42,3 +42,8 @@ Route::get('/list','ListController@index');
 Route::get('/autocomplete','ReservationController@autocomplete');
 // ruta para adicionar el tipo de habitacion
 Route::post('/addreservation', 'ReservationController@addReservation');
+Route::get('/pack','PackController@index');
+
+Route::resource('pack','PackController');
+Route::post('/deletePack','PackController@destroy');
+Route::post('/editPack','PackController@update');
