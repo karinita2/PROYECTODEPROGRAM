@@ -20,6 +20,8 @@ class RoomController extends Controller
         $rooms = DB::table('rooms')
             ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
             ->where('rooms.name','like','%'.$search.'%')
+            ->orWhere('room_types.room_type','like','%'.$search.'%')
+            ->orWhere('rooms.availability','like','%'.$search.'%')
             ->orderBy('id_room','asc')
             ->paginate(10);
         return view('room.room',compact('rooms'));

@@ -31,14 +31,14 @@ class ReservationController extends Controller
         }
         $reservation = new Reservations();
         $reservation->date              =   date('Y-m-d');
-        $reservation->ckechin           =   $request->checkin;
-        $reservation->ckechout          =   $request->checkout;
+        $reservation->ckechin           =   date('Y-m-d');
+        $reservation->ckechout          =   date('Y-m-d');
         $reservation->type_reservation  =   $tipo;
         $reservation->total             =   0;
         $reservation->user_id           =   $request->id;
         $reservation->save();
 
-        dd('reserva creada');
+        return redirect()->back();
 
     }
 

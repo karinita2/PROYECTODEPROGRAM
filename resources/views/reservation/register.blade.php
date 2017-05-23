@@ -389,8 +389,6 @@
 
     </div>
 
-
-
 @endsection
 
 @section('js')
@@ -405,6 +403,7 @@
 
             <script type="text/javascript">
                 $(document).ready(function () {
+
                     $("#formReservation").validate({
                         rules : {
                             tipo_habitacion : { required : true }
