@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+//pagina web
+Route::get('/', 'WebpageController@index');
 
 Route::get('/login', 'LoginController@index');
 
@@ -30,6 +33,7 @@ Route::resource('user', 'UserController');
 
 Route::post('/editUser', 'UserController@edit');
 Route::post('/addUser', 'UserController@store');
+Route::post('/addPack', 'PackController@store');
 Route::post('/deleteUser', 'UserController@deleteUser');
 
 Route::resource('/reservation','ReservationController');
@@ -47,3 +51,4 @@ Route::get('/pack','PackController@index');
 Route::resource('pack','PackController');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
+

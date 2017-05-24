@@ -37,7 +37,16 @@ class PackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pack=new Pack();
+
+        $pack->pack        = $request->pack;
+        $pack->price       = $request->price;
+        $pack->description = $request->description;
+
+        $pack->save();
+
+        return response()->json($pack);
+
     }
 
     /**
