@@ -48,3 +48,6 @@ Route::get('/pack','PackController@index');
 Route::resource('pack','PackController');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
+
+//pagina we
+Route::get('/inicio', 'WebpageController@index');
