@@ -39,6 +39,7 @@
                         </tr>
                         </thead>
 
+                        <?php print_r($rooms) ?>
                         <tbody>
                         @foreach($rooms as $key )
                             <tr>
