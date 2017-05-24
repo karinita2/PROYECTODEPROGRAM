@@ -3,6 +3,17 @@
     <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
     <link href="assets/plugins/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/>
     <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
+
+
+
+    <link href="assets/plugins/select2/css/select2.css" rel="stylesheet">
+
+
+
+
+
+
+
 @endsection
 @section('middle-content')
     <div class="row">
@@ -13,13 +24,15 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">Lista de paquetes</span>
-
-                    <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="browser-default"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div><div id="example_filter" class="dataTables_filter"><label><input type="search" class="" placeholder="Search records" aria-controls="example"></label></div><table id="example" class="display responsive-table datatable-example dataTable" role="grid" aria-describedby="example_info">
+                    <a class="waves-effect waves-light btn m-b-xs" id="createpackbutton"><i class="material-icons left">cloud</i>Registrar paquete</a>
+                    <div id="example_wrapper" class="dataTables_wrapper"><div class="dataTables_length" id="example_length"><label>Show <select name="example_length" aria-controls="example" class="browser-default"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div><div id="example_filter" class="dataTables_filter"><label><input type="search" class="" placeholder="Search records" aria-controls="example"></label></div>
+                        <table id="packtable" class="display responsive-table datatable-example dataTable" role="grid" aria-describedby="example_info">
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50px;">Codigo</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 200px;">Paquete</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 200px;">Precio</th>
+                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 100px;">Descripcion</th>
                                 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 100px;">Opciones</th>
                             </tr>
 
@@ -33,6 +46,7 @@
                                     <td class="sorting_1">{{ $pack->id_pack }}</td>
                                     <td>{{ $pack->pack }}</td>
                                     <td>{{ $pack->price }}</td>
+                                    <td>{{$pack->description}}</td>
                                     <td>
                                         <button class="btn btn-warning btn-detail edit-pack"
                                                 data-idpack         = "{{ $pack->id_pack }}"
@@ -52,6 +66,7 @@
 
                                 @extends('modals.deletepack')
                                 @extends('modals.editpack')
+                                @extends('modals.createpack')
                             @endforeach
                             </tbody>
 
@@ -92,6 +107,15 @@
     <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="assets/js/alpha.min.js"></script>
     <script src="assets/js/ajax_pack.js"></script>
+
+
+
+
+    <script src="assets/plugins/select2/js/select2.min.js"></script>
+
+    <script src="assets/js/pages/form-select2.js"></script>
+
+
     <script type="text/javascript">
         $('button.delete-btn').on('click', function(e){
             e.preventDefault();

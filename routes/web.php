@@ -30,6 +30,7 @@ Route::resource('user', 'UserController');
 
 Route::post('/editUser', 'UserController@edit');
 Route::post('/addUser', 'UserController@store');
+Route::post('/addPack', 'PackController@store');
 Route::post('/deleteUser', 'UserController@deleteUser');
 
 Route::resource('/reservation','ReservationController');

@@ -1,4 +1,6 @@
-
+$("#createpackbutton").click(function () {
+    $('#createpackmodal').openModal(true);
+});
 
 $(document).on('click', '.edit-pack', function() {
 
@@ -68,7 +70,6 @@ $(document).on('click', '.delete-pack', function() {
 });
 
 $('.modal-footer').on('click', '.deletepack', function() {
- 
     $.ajax({
         type: 'post',
         url: '/deletePack',
@@ -82,4 +83,40 @@ $('.modal-footer').on('click', '.deletepack', function() {
             swal("Eliminado!", "Se ha eliminado correctamente", "success");
         }
     });
+});
+
+
+
+
+$("#crpmbutton").click(function() {
+    //var e = document.getElementsByName("multiple[]");
+    var packdes="";
+    var values = $('#multiple').val();
+
+    for(var i in values) {
+        packdes+=""+values[i]+",";  // (o el campo que necesites)
+    }
+
+    $.ajax({
+        type: 'post',
+        url: '/addPack',
+        data: {
+            '_token': $('input[name=_token]').val(),
+            'pack': $('input[name=packc]').val(),
+            'price': $('input[name=pricec]').val(),
+            'description': packdes
+        },
+        success: function(data) {
+            if ((data.errors)) {
+                $('.error').removeClass('hidden');
+                $('.error').text(data.errors.title);
+                $('.error').text(data.errors.description);
+            } else {
+                $('.error').remove();
+                $('#packtable').append("<tr class='item" + data.id_pack + "'><td>" + data.id_pack + "</td><td>" + data.pack + "</td><td>" + data.price + "</td><td>" + data.description + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+            }
+        },
+    });
+    $('#title').val('');
+    $('#description').val('');
 });
