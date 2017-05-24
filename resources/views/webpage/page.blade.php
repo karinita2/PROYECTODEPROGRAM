@@ -77,7 +77,8 @@
                     <li><a class="scroll-to" href="#sc-features">Servicios</a></li>
                     <li><a class="scroll-to" href="#sc-rates">Paquetes</a></li>
                     <li><a class="scroll-to" href="#sc-about">Sobre nosotros</a></li>
-                    <li><a class="scroll-to" href="#sc-contact">Contáctanos</a></li>
+                    <li><a class="scroll-to" href="{{ url('/login') }}">Login</a></li>
+                    <li><a class="scroll-to" href="{{ url('/register') }}">Registrate</a></li>
                 </ul>
                 <!-- Nav-Links end -->
             </div>
