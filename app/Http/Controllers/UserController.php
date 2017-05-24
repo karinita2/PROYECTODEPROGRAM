@@ -40,16 +40,58 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = DB::table('users')
-            ->join('people', 'people.id_person', '=', 'users.person_id')
-            ->join('roles', 'roles.id_role', '=', 'users.role_id')
-            ->find ($request->id);
+        $person=new Person();
+        $person->name        = $request->name;
+        $person->last_name    = $request->last_name;
+        $person->phone       = $request->phone;
+        $person->sex         = $request->sex;
+        $person->nationality = $request->nationality;
+        $person->ndi         ="22222223";
+       // $person->ndi         = $request->ndi;
+        $person->save();
 
-        $user->id           = $request->id;
-        $user->email        = $request->email;
-        $user->role         = $request->
+
+        $model = Person::all()->last();
+        $role = 1;
+        $user = new User();
+#'name'              => $data['name'],
+        $user->email       = $request->email;
+        $user->password    = bcrypt($request->password);
+        $user->role_id     = $role;
+        $user->person_id   = $model->id_person;
         $user->save();
-        return response()->json($user);
+        return response()->json($person);
+
+
+
+
+
+    }
+
+
+    public function createuser(array $data)
+    {
+        $persona = Person::create([
+            'name'                  => $data['nombres'],
+            'last_name'             => $data['apellido'],
+            'phone'                 => $data['celular'],
+            'sex'                   => $data['sexo'],
+            'nationality'           => $data['nacionalidad'],
+            'ndi'                   => $data['ndi'],
+            #'carnet'                => $data['carnet'],
+            #'direccion'             => $data['direccion'],
+            #'foto'                  => $data['foto'],
+        ]);
+
+        $model = Person::all()->last();
+        $role = 1;
+        return User::create([
+            #'name'              => $data['name'],
+            'email'             => $data['email'],
+            'password'          => bcrypt($data['password']),
+            'role_id'           => $role,
+            'person_id'        => $model->id_person,
+        ]);
     }
 
     /**
