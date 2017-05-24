@@ -21,7 +21,7 @@
                             <input type="text" name="search" class="input-field col s4" placeholder="Buscar ...">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default -sm">
-                                    <i class="fa fa-search"></i>
+                                    <i class="material-icons dp48">search</i>
                                 </button>
                             </span>
                         </div>
@@ -39,6 +39,7 @@
                         </tr>
                         </thead>
 
+                        <?php print_r($rooms) ?>
                         <tbody>
                         @foreach($rooms as $key )
                             <tr>
