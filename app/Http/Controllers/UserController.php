@@ -22,6 +22,13 @@ class UserController extends Controller
         return view('user.read', compact('users'));
     }
 
+    public function findUser(Request $request)
+    {
+
+        $person = Person::find($request->person_id);
+        return response()->json($person);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
