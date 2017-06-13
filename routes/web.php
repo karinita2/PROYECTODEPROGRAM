@@ -38,7 +38,7 @@ Route::post('/deleteUser', 'UserController@deleteUser');
 
 Route::resource('/reservation','ReservationController');
 Route::post('/reservation/store','ReservationController@store');
-
+Route::get('/reservationcli','ReservationController@clientreservation');
 
 Route::get('/list','ListController@index');
 
@@ -47,7 +47,7 @@ Route::get('/autocomplete','ReservationController@autocomplete');
 // ruta para adicionar el tipo de habitacion
 Route::post('/addreservation', 'ReservationController@addReservation');
 Route::get('/pack','PackController@index');
-
+Route::post('/findUser','UserController@findUser');
 Route::resource('pack','PackController');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
