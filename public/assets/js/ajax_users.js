@@ -90,11 +90,7 @@ $("#crumbutton").click(function() {
 });
 
 //delete function
-$(document).on('click', '.delete-modal', function() {
-    $('#id').val($(this).data('id'));
-    $('#id_person').val($(this).data('id_person'));
-   //  $('#name').val($(this).data('name'));
-    $('.name').html($(this).data('name'));
+$(document).on('click', '.create-modal', function() {
     $('#modal2').openModal(true);
 });
 
