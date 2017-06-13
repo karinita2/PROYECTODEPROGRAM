@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use Auth;
 
 class HistoryController extends Controller
 {
-
+    
     public function index()
     {
-        return view('user.history');
+
+            $reservaciones = DB::table('reservations')
+            ->where('reservations.user_id', '=', Auth::user()->id)
+            ->paginate(10);
+
+        return view('user.history',compact('reservaciones'));
     }
 
 
