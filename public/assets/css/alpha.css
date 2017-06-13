@@ -3388,7 +3388,7 @@ table.bordered>tbody > tr {
 }
 
 .error-page.page-coming-soon {
-    background: url("../images/mountains2.jpg") no-repeat;
+    background: url("../images/hotel.jpg") no-repeat;
     background-size: cover;
 }
 
@@ -3612,7 +3612,7 @@ body.search-app .search-input input:-ms-input-placeholder {
 .signin-page {
     height: 100%;
     width: 100%;
-    background: url('../images/mountains2.jpg') no-repeat;
+    background: url('../images/hotel.jpg') no-repeat;
     background-size: cover;
 }
 
