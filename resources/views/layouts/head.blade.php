@@ -556,6 +556,15 @@
                         </ul>
                     </div>
                 </li>
+                <li class="no-padding">
+                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas Grupales<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{{ url('/reservation') }}">Registro Grupal</a></li>
+                            <li><a href="{{ url('/list') }}">Lista</a></li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">assignment_ind</i>Usuarios<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
