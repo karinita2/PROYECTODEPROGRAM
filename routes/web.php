@@ -55,4 +55,5 @@ Route::post('/findUser','UserController@findUser');
 Route::resource('pack','PackController');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
-
+// rutas para reservas grupales
+Route::resource('/reservasgrupales','GroupController');
