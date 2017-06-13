@@ -12,7 +12,11 @@ class ReservationController extends Controller
     {
         return view('reservation.register');
     }
-
+    //Funcion para index de reservacion cliente
+    public function clientreservation()
+    {
+        return view('reservation.clientreservation');
+    }
     public function create()
     {
         //
