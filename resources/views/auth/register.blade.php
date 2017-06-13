@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="input-field col s12 m6 l6">
                                         <div class="form-group{{ $errors->has('nacionalidad') ? ' has-error' : '' }}">
-                                            <i class="material-icons prefix">account_circle</i>
+                                            <i class="material-icons prefix">location_on</i>
                                                 <input id="name" type="text" class="validate" name="nacionalidad" value="{{ old('nacionalidad') }}" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')" >
                                                 <label for="nombres" class="col-md-4 control-label">Nacionalidad(*)</label>
                                                 @if ($errors->has('nacionalidad'))
@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <div class="input-field col s12 m6 l6">
-                                        <i class="material-icons prefix">account_circle</i>
+                                        <i class="material-icons prefix">call</i>
                                         <input id="celular" type="number" class="validate" name="celular" value="{{ old('celular') }}" >
                                         <label for="celular">Teléfono</label>
                                     </div>
@@ -63,7 +63,7 @@
 
                                 <div class="row">
                                     <div class="input-field col s12 m6 l6">
-                                        <i class="material-icons prefix">account_circle</i>
+                                        <i class="material-icons prefix">credit_card</i>
                                         <input id="ndi" type="text" class="validate" name="ndi" value="{{ old('ndi') }}" >
                                         <label for="ndi">Documento de Identidad</label>
                                     </div>
@@ -90,7 +90,7 @@
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <i class="material-icons prefix">account_circle</i>
+                                        <i class="material-icons prefix">person_pin</i>
                                         <input id="name" type="text" class="validate" name="name" value="{{ old('name') }}" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')" >
                                         <label for="nombres" class="col-md-4 control-label">Usuario(*)</label>
                                         @if ($errors->has('name'))
@@ -103,7 +103,7 @@
 
                                 <div class="input-field col s12 m6 l6">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <i class="material-icons prefix">account_circle</i>
+                                        <i class="material-icons prefix">email</i>
                                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')">
                                             <label for="email" class="col-md-4 control-label">Correo Electronico (*)</label>
                                             @if ($errors->has('email'))
@@ -117,7 +117,7 @@
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
                                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <i class="material-icons prefix">account_circle</i>
+                                        <i class="material-icons prefix">vpn_key</i>
                                             <input id="password" type="password" class="form-control" name="password" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')">
                                             <label for="password" class="col-md-4 control-label">Contraseña (*)</label>
                                             @if ($errors->has('password'))
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <i class="material-icons prefix">account_circle</i>
+                                    <i class="material-icons prefix">vpn_key</i>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required oninvalid="setCustomValidity('Por favor llene este campo')" oninput="setCustomValidity('')">
                                     <label for="password-confirm" class="col-md-4 control-label">Repetir contraseña (*)</label>
                                 </div>
