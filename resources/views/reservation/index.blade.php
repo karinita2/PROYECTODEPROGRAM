@@ -1,86 +1,221 @@
 @extends('layouts.head')
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/css/datepicker3.css') }}">
 @section('css')
+	<style>
+		.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+			background: #CCCCCC;
+			color: #444;
+			cursor: default;
+		}
+	</style>
+	<style>
+		#overlay1 {
+			position: fixed;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			background: #ffffff;
+			opacity: 0.7;
+			filter: alpha(opacity=80);
+			-moz-opacity: 0.6;
+			z-index: 10000;
+		}
+	</style>
 @endsection
 
 @section('middle-content')
 	<div class="row">
-		<div class="s12">
-			<b><h2>REGISTRO DE RESERVAS </h2></b>
+		<div class="col s7 m7 l7">
+			<b><h5>REGISTRO DE RESERVAS </h5></b>
 		</div>
-		<div class="col s12 m12"><br>
-				<br>
-				<form action="{{ url('/reservation/register') }}" id="formReservationStore" method="POST">
-						{{ csrf_field() }}
-					<div class="input-field col s6 s6 l6" >
-							<i class="material-icons prefix">account_circle</i>
-							<input id="cliente" name="cliente" type="text" class="validate">
+		<div class="col s5"><br>
+			<a class="waves-effect waves-light btn green modal-trigger" href="#modal1"><i class="material-icons left">cloud</i>Registrar Cliente</a>
+			@extends('modals.createUser')
+		</div>
+	</div>
+		<div class="card">
+			<div class="row">
+				<div class="col s12 m12"><br>
+					<form id="formReservationStore" action="{{url('/reservation/store')}}" enctype="multipart/form-data"  method="POST">
+							{{ csrf_field() }}
+						<div class="row">
 
-							<label for="cliente" class="">Nombre, Apellido o NITCI</label>
-					</div>
-					<input type="hidden" id="id_person" name="id_person">
-					<div class="input-field col m6 s6 l6">
-						<div class="select-wrapper">
-							<div class="select-wrapper initialized">
-								<span class="caret">▼</span>
-								<select id="room_type" name="room_type" class="initialized">
-									<option value="default">Tipo Habitación...</option>
-									<option value="1">suit</option>
-									<option value="2">matrimonio</option>
-									<option value="3">simple</option>
-								</select>
-								<input type="hidden" name="room_type_id" id="room_type_id">
+							<div class="input-field col s5">
+								<input placeholder="Ingrese cliente" id="cliente" type="text" class="validate">
+								<label for="cliente" class="active">Cliente</label>
+							</div>
+							<div class="input-field col s1 m1 l1">
+								<input type="hidden" id="id-person" name="id-person">
+							</div>
+							<div class="input-field col s6">
+								<div class="select-wrapper">
+									<div class="select-wrapper initialized">
+										<label class="active">Tipo de habitación</label>
+										<span class="caret">▼</span>
+										<select id="room-type" name="room-type">
+											<option disabled selected >Seleccione una habitacion</option>
+											@foreach($roomTypes as $roomType)
+												<option value="{{$roomType->id_room_type}}">{{$roomType->room_type}}</option>
+											@endforeach
+										</select>
+										<!--	<input type="hidden" name="room-type-id" id="room-type-id">-->
+
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="input-field col s5">
+								<input placeholder="Ingrese cantidad de adultos" id="cantidadAdulto" name="cantidadAdulto" type="text" class="validate">
+								<label for="cantidadAdulto" class="active">Adultos</label>
+							</div>
+							<div class="input-field col s1 m1 l1">
+								<input type="hidden" id="role_id" name="role_id" value="{{ Auth::user()->role_id }}">
+							</div>
+							<div class="input-field col s5 ">
+								<input placeholder="Ingrese cantidad de niños" id="cantidadNino" name="cantidadNino" type="text" class="validate">
+								<label for="cantidadNino" class="active">Niños</label>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s3 m3 l3">
-							<i class="material-icons prefix">open_in_browser</i>
-							<input placeholder="" id="checkin" name="checkin" type="date">
-							<label for="fechabautismo" class="active"><b>Fecha de inicio </b></label>
+						<div class="row">
+							<div class="input-field col s6 m6 l6">
+								<i class="material-icons prefix">open_in_browser</i>
+								<input type="text" name="check_in" class="form-control datepicker1" placeholder="Registrarse" autocomplete="off" />
+								<label for="check_in" class="active"><b>Fecha de inicio </b></label>
+							</div>
+							<div class="input-field col s6 m6 l6">
+								<i class="material-icons prefix">open_in_browser</i>
+								<input type="text" name="check_out" class="form-control datepicker2"  placeholder="Echa un vistazo" autocomplete="off" readonly="" />
+								<label for="check_out" class="active"><b>Fecha de salida </b></label>
+							</div>
 						</div>
-						<div class="input-field col s3 m3 l3">
-							<i class="material-icons prefix">open_in_browser</i>
-							<input placeholder="" id="checkout" name="checkout" type="date">
-							<label for="fechabautismo" class="active"><b>Fecha de salida </b></label>
-						</div>
-					</div>
 
-					<div class="input-field col s4 m4 l4" align="center">
-						<button class="waves-effect waves-light btn green" type="submit"><i class="material-icons right">cloud</i>Siguiente</button>
-						<a class="waves-effect waves-light btn red modal-trigger" href="#modal1"><i class="material-icons left">cloud</i>Registrar Cliente</a>
-					</div>
-					@extends('modals.createUser')
-				</form>
+						<!--<div class="input-field col s4 m4 l4" align="center">
+							<button class="waves-effect waves-light btn green" type="submit"><i class="material-icons right">cloud</i>Siguiente</button>
+						</div>-->
+						<div class="row">
+							<div class="col s4 m4 l4 col-offset-s1">
+								<div id="orderdata"></div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<div class="pull-right">
+								<input class="btn btn-primary" type="submit" value="Aceptar" style="display:none" id="next" />
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 
+
 		</div>
-	</div>
-	</div>
+
+</div>
 @endsection
 
 @section('js')
-	<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-	<script src="assets/plugins/materialize/js/materialize.min.js"></script>
-	<script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-	<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-	<script src="assets/js/alpha.min.js"></script>
-	<script src="assets/js/jquery-ui.js"></script>
-	<script src="assets/js/jquery.validate.js"></script>
-
+	<script src="{{ asset('assets/plugins/jquery/jquery-2.2.0.min.js') }}"></script>
+	<script src="{{ asset('assets/plugins/materialize/js/materialize.min.js') }}"></script>
+	<script src="{{ asset('assets/plugins/material-preloader/js/materialPreloader.min.js') }}"></script>
+	<!--<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>-->
+	<script src="{{ asset('assets/js/alpha.min.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
+	<script src="{{ asset('assets/js/jquery.validate.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
 	<script type="text/javascript">
         $('#cliente').autocomplete({
             source: '{!! url('/buscarCliente') !!}',
             minlength:1,
-            autoFocus:true,
-            select:function (e, ui) {
-                $('#id_person').val(ui.item.id);
+            select:function (event, ui) {
+                $('#id-person').val(ui.item.id);
             }
         });
+        $(function() {
+            $('.datepicker1').datepicker({
+                todayHighlight: true,
+                autoclose: true,
+                format: 'dd-mm-yyyy',
+                startDate: new Date(),
+                // endDate : new Date('2014-08-08'),
+            }).on('changeDate', function (selected) {
+                $(".datepicker2").attr("readonly", false);
+                $('.datepicker2').focus();
+            });;
+            $('.datepicker2').datepicker({
+                todayHighlight: true,
+                autoclose: true,
+                format: 'dd-mm-yyyy',
+                startDate: new Date(),
+            }).on('changeDate', function (selected) {
+                var date1	= $(".datepicker1").datepicker('getDate');
+                var date2	= $(".datepicker2").datepicker('getDate');
+                if(date2<date1){
+                    Materialize.toast('<b>Error - La fecha de salida debe ser mayor que la fecha de entrada!!</b>', 4000, 'red');
+                    $('.datepicker2').val('');
+                    $('.datepicker2').focus();
+                }else{
+                    check_availbility();
+                }
+            });
+        });
+        function check_availbility(){
+            call_loader();
+            $.ajax({
+                url: '{{ url('/roomsearch') }}',
+                type:'POST',
+                data:$('#formReservationStore').serialize(),
+                success:function(result){
+                    var obj = result.x;
+                    var search = result.search;
+                    if(obj==1)
+                    {
+                        $('#orderdata').html(search);
+                        $('#next').show();
+                        remove_loader();
+                        Materialize.toast('<b>Tipo de habitacion disponible</b>', 4000, 'green');
+                        //get_order_data();
+                    }
+                    else
+                    {
+                        remove_loader();
+                        Materialize.toast('<b>Tipo de habitacion no disponible</b>', 4000, 'red');
+                    }
+                }
+            });
+        }
+        function get_order_data(){
+           call_loader();
+            $.ajax({
+                url: '{{ url('/addReservation') }}',
+                type:'POST',
+                data:$('#formReservationStore').serialize(),
+                success:function(result){
+                   // alert(result);return false;
+                    $('#orderdata').html(result);
+                    $('#next').show();
+                    remove_loader();
+                }
+            });
+        }
+        function remove_loader()
+        {
+            $('#overlay1').remove();
+        }
+        function call_loader(){
+            if($('#overlay1').length == 0 ){
+                var over = '<div id="overlay1">' +
+                    '<img  style="padding-top:300px; margin: 0 auto; " class="img-responsive " id="loading" src="http://pysrencoperu.com/sistemasinformaticos/sistemadehotel/assets/admin/dist/img/ajax-loader.gif"></div>';
+                $(over).appendTo('body');
+            }
+        }
 	</script>
 	<script type="text/javascript">
+		$(document).ready(function () {
 
-        $(document).ready(function () {
             $("#createUser").validate({
                 rules : {
                     name 		: { required : true },

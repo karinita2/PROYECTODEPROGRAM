@@ -48,14 +48,26 @@ $('.modal-footer').on('click', '.edit', function() {
     });
 });
 // add function
-$("#add").click(function() {
+
+
+
+$("#createuserbutton").click(function () {
+    $('#createusermodal').openModal(true);
+});
+$("#crumbutton").click(function() {
+
     $.ajax({
         type: 'post',
-        url: '/addItem',
+        url: '/addUser',
         data: {
             '_token': $('input[name=_token]').val(),
-            'title': $('input[name=title]').val(),
-            'description': $('input[name=description]').val()
+            'name': $('input[name=namec]').val(),
+            'last_name': $('input[name=last_namec]').val(),
+            'phone':$('input[name=phonec]').val(),
+            'sex':$('input[name=sexc]').val(),
+            'nationality':$('input[name=nationalityc]').val(),
+            'email':$('input[name=emailc]').val(),
+            'password':$('input[name=passwordc]').val()
         },
         success: function(data) {
             if ((data.errors)) {
@@ -64,8 +76,13 @@ $("#add").click(function() {
                 $('.error').text(data.errors.description);
             } else {
                 $('.error').remove();
-                $('#table').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.title + "</td><td>" + data.description + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                $('#userstable').append("<tr class='item" + data.id_person + "'><td>" + data.id_person + "</td><td>" + data.name + "</td><td>" + data.last_name + "</td><td>" + data.phone + "</td><td>" + data.nationality + "</td>" +
+                    "<td>" +
+                    "<button class='btn btn-warning btn-detail edit-modal' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'> <i class='material-icons dp48'>settings</i></button> " +
+                    "<button class='waves-effect waves-light btn red delete-modal' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><i class='material-icons dp48'>delete</i></button></td></tr>");
             }
+
+
         },
     });
     $('#title').val('');

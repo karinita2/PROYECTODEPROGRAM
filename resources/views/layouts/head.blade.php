@@ -12,16 +12,17 @@
     <meta name="author" content="Steelcoders" />
 
     <!-- Styles -->
-    <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/plugins/materialize/css/materialize.min.css')}}"/>
+
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
-    <link href="assets/plugins/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="assets/plugins/metrojs/MetroJs.min.css" rel="stylesheet">
-    <link href="assets/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet">
+    <link href="{{asset('assets/plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/metrojs/MetroJs.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/weather-icons-master/css/weather-icons.min.css')}}" rel="stylesheet">
 
     <!-- Theme Styles -->
-    <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/css/alpha.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css"/>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -544,6 +545,9 @@
             </div>
             <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
                 <li class="no-padding active"><a class="waves-effect waves-grey active"  href="{{ url('/home') }}"><i class="material-icons">settings_input_svideo</i>Inicio</a></li>
+                <li class="no-padding active">
+                    <a class="waves-effect waves-grey active" href="{{ url('/room') }}"><i class="material-icons">apps</i>Habitaciones<i class="material-icons"></i></a>
+                </li>
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
@@ -553,18 +557,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">apps</i>Habitaciones<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a href="ui-accordions.html">Suite</a></li>
-                            <li><a href="ui-badges.html">Matrimoniales</a></li>
-                            <li><a href="ui-buttons.html">Dobles</a></li>
-                            <li><a href="ui-typography.html">Simples</a></li>
-                            <li><a href="ui-cards.html">Otros</a></li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">assignment_ind</i>Usuarios<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
@@ -588,21 +581,7 @@
     <main class="mn-inner inner-active-sidebar">
         @yield('middle-content')
     </main>
-    <div class="page-footer">
-        <div class="footer-grid container">
-            <div class="footer-l white">&nbsp;</div>
-            <div class="footer-grid-l white">
-            </div>
-            <div class="footer-r white">&nbsp;</div>
-            <div class="footer-grid-r white">
-                <a class="footer-text" href="#">
-                    <div>
-                        Reservas
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    
 </div>
 <div class="left-sidebar-hover"></div>
 
