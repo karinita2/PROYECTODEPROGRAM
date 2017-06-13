@@ -4530,7 +4530,7 @@ small {
 .card {
   position: relative;
   margin: 0.5rem 0 1rem 0;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.82);
   transition: box-shadow .25s;
   border-radius: 2px;
 }
