@@ -35,12 +35,15 @@ Route::post('/addUser', 'UserController@store')->middleware('auth');
 Route::post('/deleteUser', 'UserController@deleteUser')->middleware('auth');
 
 Route::resource('/reservation','ReservationController');
+Route::get('/reservation', 'ReservationController@index')->middleware('auth');
 Route::get('/reservation/create', 'ReservationController@create');
 Route::post('/reservation/store','ReservationController@store');
 Route::get('/reservationcli','ReservationController@clientreservation');
 Route::post('/reservation/register', 'ReservationController@reservationRegister');
 Route::get('/buscarCliente', 'ReservationController@autocompleteCliente');
 Route::post('/roomsearch', 'ReservationController@searchRooms');
+Route::get('/reservations/{reservation}', 'ReservationController@editReservations');
+Route::post('/addRoom', 'ReservationController@addRoom');
 
 Route::get('/list','ListController@index');
 // ruta de autocomplete
