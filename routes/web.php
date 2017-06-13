@@ -54,3 +54,5 @@ Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
 // rutas para reservas grupales
 Route::resource('/reservasgrupales','GroupController');
+// Ruba del historial de reservas de cliente.
+Route::get('/reservationHistory','HistoryController@index');
