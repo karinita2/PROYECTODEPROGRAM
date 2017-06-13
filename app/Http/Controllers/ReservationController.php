@@ -18,7 +18,11 @@ class ReservationController extends Controller
             ->get();
         return view('reservation.index', compact('roomTypes'));
     }
-
+    //Funcion para index de reservacion cliente
+    public function clientreservation()
+    {
+        return view('reservation.clientreservation');
+    }
     public function create()
     {
         return view('reservation.register');

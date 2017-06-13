@@ -17,6 +17,19 @@
                                 <label for="room_type" class="active">Apellido</label>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <input type="hidden" id="id_reservation" class="validate">
+                            <div class="input-field col s6">
+                                <input placeholder="No definido" id="ckechin" type="label" class="validate" disabled>
+                                <label for="ckechin" class="active" >Fecha de entrada</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="No definido" id="ckechout" type="label" class="validate" disabled>
+                                <label for="ckechout" class="active">Fecha de Salida</label>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="input-field col s4">
                                 <input placeholder="Estado" id="availability" type="label" class="validate" disabled>
@@ -24,18 +37,6 @@
                             </div>
                         </div>
                     </form>
-                    <div align='right' class="row">
-                        <div class="col s8">
-                            <div class="page-title">Calendar</div>
-                        </div>
-                        <div class="col s8 m8 l8">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div id="calendar"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

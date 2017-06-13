@@ -175,12 +175,14 @@
             <ul id="main-menu" class="gui-controls">
 
                 <!-- BEGIN DASHBOARD -->
+                @if (Auth::user()->role_id=="2")
                 <li>
                     <a href="../../html/dashboards/dashboard.html" >
                         <div class="gui-icon"><i class="md md-home"></i></div>
                         <span class="title">Habitaciones</span>
                     </a>
                 </li><!--end /menu-li -->
+                @endif
                 <!-- END DASHBOARD -->
 
                 <!-- BEGIN EMAIL -->
