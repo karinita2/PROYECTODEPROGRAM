@@ -42,7 +42,7 @@ class RoomController extends Controller
             ->paginate(10);
 
         */
-        $rooms= $this->roomy->getRoomTypes($search);
+        $rooms= $this->roomy->getRoomTypes();
         return view('room.room',compact('rooms'));
     }
     public function create()

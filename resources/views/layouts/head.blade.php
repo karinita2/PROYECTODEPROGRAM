@@ -547,21 +547,12 @@
                     <div class="collapsible-body">
                         <ul>
                             <li><a href="{{ url('/reservation') }}">Registrar</a></li>
-                            <li><a href="{{ url('/list') }}">Lista</a></li>
                             <li><a href="{{ url('/reservationcli') }}">Reservar</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="no-padding">
-                    <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas Grupales<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-                    <div class="collapsible-body">
-                        <ul>
                             <li><a href="{{ url('/reservasgrupales') }}">Registro Grupal</a></li>
-                            <li><a href="{{ url('/list') }}">Lista</a></li>
+                            <li><a href="{{ url('/reservationList') }}">Lista</a></li>
                         </ul>
                     </div>
                 </li>
-
                 @endif
                 @if(Auth::user()->role_id=="1" )
                 <li class="no-padding">
