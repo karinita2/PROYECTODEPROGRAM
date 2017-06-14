@@ -19,7 +19,7 @@ class HistoryController extends Controller
         return view('user.history',compact('reservaciones'));
     }
 
-
+    
     public function create()
     {
         //

@@ -45,34 +45,29 @@
                             <tbody>
                               @foreach($reservaciones as $key )
                             <tr>
-                                <td> {{ $key->id_reservation }}</td>
+                                <td>{{ $key->id_reservation }}</td>
                                 <td>{{ $key->ckechin }}</td>
                                 <td>{{ $key->ckechout }}</td>
                                 <td>{{ $key->type_reservation }}</td>
                                 <td>
-                            
+                                    <button class="btn btn-warning btn-detail edit-modal"
+                                            data-id_reservation       = "{{ $key->id_reservation }}"
+                                            data-date                 = "{{ $key->date }}"
+                                            data-ckechout             = "{{ $key->ckechout}}"
+                                            data-ckechin              = "{{ $key->ckechin }}"
+                                            data-type_reservation     = "{{ $key->type_reservation}}"
+                                            data-total                = "{{ $key->total }}">
+                                        Detalles
+                                    </button>
                                 </td>
                             </tr>
+                            @extends('modals.viewhistory')
                         @endforeach
                         </tbody>
                             <br>
                           
                         </table>
-                        <div class="dataTables_info" id="example_info" role="status" aria-live="polite">-</div>
-                        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                            <a class="paginate_button previous" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">
-                                <i class="material-icons">chevron_left</i></a>
-                            <span>
-                                <a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a>
-                                <a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a>
-                                <a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">3</a>
-                                <a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">4</a>
-                                <a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">5</a>
-                                <a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">6</a>
-                            </span>
-                            <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">
-                                <i class="material-icons">chevron_right</i>
-                            </a></div>
+                        
                     </div>
                 </div>
             </div>
@@ -80,6 +75,7 @@
     </div>
 
 @endsection
+
 @section('js')
     <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
     <script src="assets/plugins/materialize/js/materialize.min.js"></script>
@@ -90,7 +86,7 @@
     <script src="assets/plugins/fullcalendar/moment.min.js"></script>
     <script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="assets/js/alpha.min.js"></script>
-    <script src="assets/js/ajax_users.js"></script>
+    <script src="assets/js/ajax_history.js"></script>
     <script src="assets/js/pages/calendar.js"></script>
 
     <!--<script src="assets/js/pages/miscellaneous-sweetalert.js"></script>-->
