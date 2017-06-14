@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Mail;
+
 /*Route::get('/', function () {
     return view('welcome');
 });*/
@@ -46,9 +48,12 @@ Route::get('/reservations/{reservation}', 'ReservationController@editReservation
 Route::post('/addRoom', 'ReservationController@addRoom');
 Route::post('/addServices', 'ReservationController@addServices');
 Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+Route::post('/saveReservation', 'ReservationController@saveReservation');
 
-
+Route::resource('/list','ListController');
 Route::get('/list','ListController@index');
+Route::post('/list/{numero}','ListController@viewReservation');
+
 // ruta de autocomplete
 Route::get('/autocomplete','ReservationController@autocomplete');
 // ruta para adicionar el tipo de habitacion
@@ -65,3 +70,11 @@ Route::get('/reservasgrupales', 'GroupController@index')->middleware('auth');
 Route::post('/addUser2', 'GroupController@storeEncargado')->middleware('auth');
 Route::get('/buscarEncargado', 'GroupController@autocompleteEncargado');
 Route::post('/groupreservation/store','GroupController@store');
+
+Route::get('welcome', function (){
+ Mail::send('emails.reserva',['name' => 'Joel'], function ($message){
+     $message->to('joel.a.rojas.v@gmail.com', 'Joel ROjas')
+         ->from('joel.a.rojas.v@gmail.com')
+         ->subject('Reserva registrada correctamente.!');
+ });
+});
