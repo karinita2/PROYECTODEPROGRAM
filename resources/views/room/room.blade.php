@@ -42,7 +42,7 @@
                         <tbody>
                         @foreach($rooms as $key )
                             <tr>
-                                <td> {{ $key->id_room }}</td>
+                                <td>{{ $key->id_room }}</td>
                                 <td>{{ $key->name }}</td>
                                 <td>{{ $key->room_type }}</td>
                                 <td>{{ $key->availability }}</td>

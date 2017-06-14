@@ -96,82 +96,9 @@
                 </form>
                 <ul class="right col s9 m3 nav-right-menu">
                     <li><a href="javascript:void(0)" data-activates="chat-sidebar" class="chat-button show-on-large"><i class="material-icons">more_vert</i></a></li>
-                    <li class="hide-on-small-and-down"><a href="javascript:void(0)" data-activates="dropdown1" class="dropdown-button dropdown-right show-on-large"><i class="material-icons">notifications_none</i><span class="badge">4</span></a></li>
                     <li class="hide-on-med-and-up"><a href="javascript:void(0)" class="search-toggle"><i class="material-icons">search</i></a></li>
                 </ul>
 
-                <ul id="dropdown1" class="dropdown-content notifications-dropdown">
-                    <li class="notificatoins-dropdown-container">
-                        <ul>
-                            F<li class="notification-drop-title">Today</li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle cyan"><i class="material-icons">done</i></div>
-                                        <div class="notification-text"><p><b>Alan Grey</b> uploaded new theme</p><span>7 min ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle deep-purple"><i class="material-icons">cached</i></div>
-                                        <div class="notification-text"><p><b>Tom</b> updated status</p><span>14 min ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle red"><i class="material-icons">delete</i></div>
-                                        <div class="notification-text"><p><b>Amily Lee</b> deleted account</p><span>28 min ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle cyan"><i class="material-icons">person_add</i></div>
-                                        <div class="notification-text"><p><b>Tom Simpson</b> registered</p><span>2 hrs ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle green"><i class="material-icons">file_upload</i></div>
-                                        <div class="notification-text"><p>Finished uploading files</p><span>4 hrs ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="notification-drop-title">Yestarday</li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle green"><i class="material-icons">security</i></div>
-                                        <div class="notification-text"><p>Security issues fixed</p><span>16 hrs ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle indigo"><i class="material-icons">file_download</i></div>
-                                        <div class="notification-text"><p>Finished downloading files</p><span>22 hrs ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#!">
-                                    <div class="notification">
-                                        <div class="notification-icon circle cyan"><i class="material-icons">code</i></div>
-                                        <div class="notification-text"><p>Code changes were saved</p><span>1 day ago</span></div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -511,15 +438,17 @@
                 </div>
                 <div class="sidebar-profile-info">
                     <a href="javascript:void(0);" class="account-settings-link">
-                        <p>David Doe</p>
                         <span>{{ Auth::user()->email }} <i class="material-icons right">arrow_drop_down</i></span>
                     </a>
                 </div>
             </div>
             <div class="sidebar-account-settings">
                 <ul>
+                    
                     <li class="no-padding">
                         <a href="{{ url('/profile') }}" class="waves-effect waves-grey"><i class="material-icons">done</i>Perfil</a>
+                        <a href="{{ url('/reservationHistory') }}" class="waves-effect waves-grey"><i class="material-icons">history</i>Historial de Reservas</a>
+                       
                     </li>
                     <li class="divider"></li>
                     <li class="no-padding">
@@ -536,12 +465,12 @@
             </div>
             <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
                 <li class="no-padding active"><a class="waves-effect waves-grey active"  href="{{ url('/home') }}"><i class="material-icons">settings_input_svideo</i>Inicio</a></li>
-                @if (Auth::user()->role_id=="1" )
+                @if (Auth::user()->role_id!="1" )
                 <li class="no-padding active">
                     <a class="waves-effect waves-grey active" href="{{ url('/room') }}"><i class="material-icons">apps</i>Habitaciones<i class="material-icons"></i></a>
                 </li>
                 @endif
-                @if(Auth::user()->role_id=="1")
+                @if(Auth::user()->role_id!="1")
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
@@ -554,7 +483,17 @@
                     </div>
                 </li>
                 @endif
-                @if(Auth::user()->role_id=="1" )
+                @if(Auth::user()->role_id=="1")
+                    <li class="no-padding">
+                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{{ url('/reservationcli') }}">Reservar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                @if(Auth::user()->role_id=="2" )
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">assignment_ind</i>Usuarios<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
@@ -565,10 +504,9 @@
                     </div>
                 </li>
                 @endif
-                @if(Auth::user()->role_id=="1")
+                @if(Auth::user()->role_id=="2")
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey" href="{{ url('/pack') }}"><i class="material-icons">desktop_windows</i>Paquetes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-
                 </li>
                 @endif
             </ul>
