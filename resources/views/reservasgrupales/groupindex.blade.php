@@ -24,35 +24,44 @@
         }
     </style>
 @endsection
-
 @section('middle-content')
     <div class="row">
-        <div class="col s7 m7 l7">
-            <b><h5>REGISTRO DE RESERVAS GRUPALES </h5></b>
+        <div class="col s12"><br>
+            <div class="page-title">Registro de Reservas Grupales</div>
         </div>
-        <div class="col s5"><br>
-            <a class="waves-effect waves-light btn green modal-trigger" href="#modal1"><i class="material-icons left">cloud</i>Registrar Encargado o Empresa</a>
-            @extends('modals.createGroupUser')
+        <div class="col s12 m12 l12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Lista de usuarios</span>
+                    <a class="waves-effect waves-light btn m-b-xs" id="createuserbutton1"><i class="material-icons left">cloud</i>Registrar Usuario</a>
+                    @extends('modals.createGroupUser')
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
         <div class="row">
             <div class="col s12 m12"><br>
-                <form id="formReservationStore" action="{{url('/reservation/store')}}" enctype="multipart/form-data"  method="POST">
+                <form id="formReservationStore" action="{{url('/groupreservation/store')}}" enctype="multipart/form-data"  method="POST">
                     {{ csrf_field() }}
                     <div class="row">
 
                         <div class="input-field col s5">
-                            <input placeholder="Ingrese el encargado de la empresa" id="cliente" type="text" class="validate">
-                            <label for="cliente" class="active">Encargado</label>
+                            <input placeholder="Ingrese cliente" id="cliente" type="text" class="validate">
+                            <label for="cliente" class="active">Cliente</label>
                         </div>
                         <div class="input-field col s1 m1 l1">
                             <input type="hidden" id="id-person" name="id-person">
                         </div>
 
+
+
                         <div class="input-field col s5">
-                            <input placeholder="Ingrese la cantidad de personas" id="cliente" type="number" class="validate">
-                            <label for="cliente" class="active">Cantidad de personas</label>
+                            <input placeholder="Ingrese cantidad de personas" id="cantidadPersonas" name="cantidadPersonas" type="text" class="validate">
+                            <label for="cantidadPersonas" class="active">Numero de Personas</label>
+                        </div>
+                        <div class="input-field col s1 m1 l1">
+                            <input type="hidden" id="role_id" name="role_id" value="{{ Auth::user()->role_id }}">
                         </div>
                     </div>
                     <div class="row">
@@ -88,10 +97,13 @@
 
     </div>
 
-    </div>
 @endsection
 
+
+
 @section('js')
+
+
     <script src="{{ asset('assets/plugins/jquery/jquery-2.2.0.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/materialize/js/materialize.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/material-preloader/js/materialPreloader.min.js') }}"></script>
@@ -99,10 +111,15 @@
     <script src="{{ asset('assets/js/alpha.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.js') }}"></script>
+
+
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/js/ajax_user2.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
     <script type="text/javascript">
         $('#cliente').autocomplete({
-            source: '{!! url('/buscarCliente') !!}',
+            source: '{!! url('/buscarEncargado') !!}',
             minlength:1,
             select:function (event, ui) {
                 $('#id-person').val(ui.item.id);
@@ -139,13 +156,13 @@
         function check_availbility(){
             call_loader();
             $.ajax({
-                url: '{{ url('/roomsearch') }}',
+                url: '{{ url('/roomsearch2') }}',
                 type:'POST',
                 data:$('#formReservationStore').serialize(),
                 success:function(result){
                     var obj = result.x;
                     var search = result.search;
-                    if(obj==1)
+                    if(obj==0)
                     {
                         $('#orderdata').html(search);
                         $('#next').show();
@@ -164,7 +181,7 @@
         function get_order_data(){
             call_loader();
             $.ajax({
-                url: '{{ url('/addReservation') }}',
+                url: '{{ url('/addReservation2') }}',
                 type:'POST',
                 data:$('#formReservationStore').serialize(),
                 success:function(result){
@@ -205,7 +222,7 @@
                     $("#load").html("<div class='circle-clipper left'><div class='circle'></div></div>");
                     $.post({
                         type : "POST",
-                        url : '{{ url('/reservation/store') }}',
+                        url : '{{ url('/groupreservation/store') }}',
                         data : {
                             '_token': 		$('input[name=_token]').val(),
                             'ndi':			$('#carnet').val(),
@@ -236,4 +253,5 @@
 
         });
     </script>
+    <!--<script src="assets/js/pages/miscellaneous-sweetalert.js"></script>-->
 @endsection

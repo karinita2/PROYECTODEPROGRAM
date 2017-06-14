@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Pack;
+use DB;
 class WebpageController extends Controller
 {
     /**
@@ -13,7 +14,11 @@ class WebpageController extends Controller
      */
     public function index()
     {
-        return view('webpage.page');
+        $packs = DB::table('packs')
+
+            ->get();
+
+        return view('webpage.page', compact('packs'));
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Details;
 use App\Reservations;
 use App\Rooms;
 use App\RoomTypes;
+use App\Services;
+use App\ServicesDetails;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
@@ -17,6 +19,19 @@ class ReservationController extends Controller
         $roomTypes = DB::table('room_types')
             ->get();
         return view('reservation.index', compact('roomTypes'));
+    }
+
+    /**
+     *
+     */
+    public function lista(){
+        $details = DB::table('details')
+            ->join('reservations','reservations.id_reservation','=','details.reservation_id')
+            ->join('rooms','rooms.id_room','=','details.room_id')
+            ->join('room_types','room_types.id_room_type','=','rooms.room_type_id')
+            ->orderBy('id_detail','asc')
+            ->paginate(10);
+        return view ('reservation.list', compact('details'));
     }
     //Funcion para index de reservacion cliente
     public function clientreservation()
@@ -34,10 +49,10 @@ class ReservationController extends Controller
         if($request->input('cantidadNino'))
         {
             $cantidadNino   = $request->input('cantidadNino');
-        }
+            }
         else
         {
-            $cantidadNino   = 0;
+        $cantidadNino   = 0;
         }
         $idPerson       = $request->input('id-person');
         $roomType       = $request->input('room-type');
@@ -47,15 +62,15 @@ class ReservationController extends Controller
         $role_id        = $request->input('role_id');
         if($role_id == 1)
         {
-            $tipo = 'interno';
+        $tipo = 'interno';
         }
         else
         {
-            $tipo = 'externo';
+        $tipo = 'externo';
         }
         /** @var $reservation
-         *  Realizamos el registro de la reserva con los datos personales, checkin, chekout
-         */
+        *  Realizamos el registro de la reserva con los datos personales, checkin, chekout
+        */
         $reservation = new Reservations();
         $reservation->date              =   date('Y-m-d');
         $reservation->ckechin           =   $checkIn;
@@ -67,74 +82,80 @@ class ReservationController extends Controller
         $reservation_id = Reservations::all()->last();
 
         $data = DB::table('rooms')
-            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
-            ->where('room_types.id_room_type', '=', $roomType)
-            ->where('rooms.availability', '=', 'available')
-            ->where('rooms.quantity', '>=', $quantity)
-            ->first();
+        ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+        ->where('room_types.id_room_type', '=', $roomType)
+        ->where('rooms.availability', '=', 'available')
+        ->where('rooms.quantity', '>=', $quantity)
+        ->first();
 
+
+        $days	= (strtotime($checkIn)-strtotime($checkOut))/86400;
+        $days 	= abs($days); $dias = floor($days);
         $details = new Details();
         $details->sub_total         = $data->price;
-        $details->cantidad          = 1;
+        $details->nights            = $days;
         $details->room_id           = $data->id_room;
         $details->reservation_id    = $reservation_id->id_reservation;
         $details->save();
 
         Rooms::where('id_room', $data->id_room)
-            ->update(['availability' => 'check-in']);
+        ->update(['availability' => 'check-in']);
 
         /*$details = DB::table('details')
-            ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
-            #->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
-            ->where('details.reservation_id', '=', $reservation_id->id_reservation )
-            ->get();
+        ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
+        #->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+        ->where('details.reservation_id', '=', $reservation_id->id_reservation )
+        ->get();
 
         $reservation = DB::table('reservations')
-            ->join('users', 'users.id', '=', 'reservations.user_id')
-            ->where('reservations.id_reservation', '=', $reservation_id->id_reservation)
-            ->get();*/
-        return redirect('/reservations/'.$reservation_id->id_reservation);
+        ->join('users', 'users.id', '=', 'reservations.user_id')
+        ->where('reservations.id_reservation', '=', $reservation_id->id_reservation)
+        ->get();*/
+    return redirect('/reservations/'.$reservation_id->id_reservation);
     }
 
 
-    public function show($id)
+    public function show()
     {
-        //
+    //
+        $reservation = DB::table('reservations')
+            ->get();
+        return response()->json($reservation);
     }
 
 
     public function edit($id)
     {
-        //
+    //
     }
 
     public function update(Request $request, $id)
     {
-        //
+    //
     }
 
     public function destroy($id)
     {
-        //
+    //
     }
     /*
-     * esta funcion nos ayuda a buscar el tipo de habitacion que existe disponible
-     */
-   /* public function autocomplete(Request $request)
+    * esta funcion nos ayuda a buscar el tipo de habitacion que existe disponible
+    */
+    /* public function autocomplete(Request $request)
     {
-        $term = $request->term;
-        $data = DB::table('room_types')
-            ->join('rooms', 'rooms.room_type_id', '=', 'room_types.id_room_type')
-            ->where('rooms.availability', 'available')
-            ->where('room_types.room_type','LIKE','%'.$term.'%')
-            ->take(5)
-            ->get();
-        $result = array();
-        foreach ($data as $key => $value)
-        {
-            $result[] = ['value' =>'Tipo: '.$value->room_type.' - '.$value->name.' | Precio: '.$value->price, 'id_room_type'=>$value->id_room_type, 'id_room'=>$value->id_room, 'precio'=>$value->price];
-        }
-        return response()->json($result);
+     $term = $request->term;
+     $data = DB::table('room_types')
+         ->join('rooms', 'rooms.room_type_id', '=', 'room_types.id_room_type')
+         ->where('rooms.availability', 'available')
+         ->where('room_types.room_type','LIKE','%'.$term.'%')
+         ->take(5)
+         ->get();
+     $result = array();
+     foreach ($data as $key => $value)
+     {
+         $result[] = ['value' =>'Tipo: '.$value->room_type.' - '.$value->name.' | Precio: '.$value->price, 'id_room_type'=>$value->id_room_type, 'id_room'=>$value->id_room, 'precio'=>$value->price];
+     }
+     return response()->json($result);
     }*/
 
     public function autocompleteCliente(Request $request)
@@ -270,7 +291,7 @@ class ReservationController extends Controller
 
         $details = new Details();
         $details->sub_total         = $data->price;
-        $details->cantidad          = 1;
+        $details->nights            = 1;
         $details->room_id           = $data->id_room;
         $details->reservation_id    = $reservation_id->id_reservation;
         $details->save();
@@ -294,15 +315,134 @@ class ReservationController extends Controller
             ->get();
         $details = DB::table('details')
             ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
-            #->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
             ->where('details.reservation_id', '=',$id_reservation)
             ->get();
 
         $reservation = DB::table('reservations')
             ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->join('people', 'people.id_person' , '=', 'users.person_id')
             ->where('reservations.id_reservation', '=', $id_reservation)
-            ->get();
+            ->first();
+        $service = DB::table('services_details')
+            ->leftJoin('services', 'services.id_service', '=', 'services_details.service_id')
+            ->leftJoin('details', 'details.id_detail', '=', 'services_details.detail_id')
+            ->where('details.reservation_id', '=',$id_reservation )
+            ->get([
+                'services_details.*',
+                'services.*'
+            ]);
 
-        return view('reservation.register', compact('details', 'reservation', 'roomTypes'));
+        return view('reservation.register', compact('details', 'reservation', 'roomTypes', 'service'));
+    }
+    public function addRoom(Request $request)
+    {
+        $cantidadAdulto = $request->input('cantidadAdulto');
+        if($request->input('cantidadNino'))
+        {
+            $cantidadNino   = $request->input('cantidadNino');
+        }
+        else{
+            $cantidadNino   = 0;
+        }
+
+        $reservation_id = Reservations::all()->last();
+
+        $roomType       = $request->input('room-type');
+        $quantity       = $cantidadAdulto + $cantidadNino;
+        $data = DB::table('rooms')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->where('room_types.id_room_type', '=', $roomType)
+            ->where('rooms.availability', '=', 'available')
+            ->where('rooms.quantity', '>=', $quantity)
+            ->first();
+
+        $details = new Details();
+        $details->sub_total         = $data->price;
+        $details->nights            = 1;
+        $details->room_id           = $data->id_room;
+        $details->reservation_id    = $reservation_id->id_reservation;
+        $details->save();
+        Rooms::where('id_room', $data->id_room)
+            ->update(['availability' => 'check-in']);
+
+        return response()->json(['result'=> true]);
+    }
+    public function ApiGetReservation()
+    {
+        $reservation = DB::table('reservations')
+            ->get();
+        return response()->json($reservation);
+    }
+    public function deleteDetail(Request $request)
+    {
+       ServicesDetails::where('detail_id',$request->id)->delete();
+       Details::where('id_detail',$request->id)->delete();
+        Rooms::where('id_room', $request->id_room)
+            ->update(['availability' => 'available']);
+       return response()->json($request->id);
+    }
+    public function addServices(Request $request)
+    {
+       $id_reservation = $request->input('id_reservation');
+       $id_detail = $request->input('id_detail');
+       $price = $request->input('price');
+        $contador = 0;
+        foreach ($request->input('service') as $services => $service)
+        {
+            if($contador == 0)
+            {
+                $decorator = new $service(new \Room($price));
+            }
+            else
+            {
+                $decorator = new $service($decorator);
+            }
+            $contador++;
+            if($service == 'Cuna'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Cama') {
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 300;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Wifi'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Restaurante'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Limpieza'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+        }
+        $subtotal = $decorator->getBaseCost();
+        Details::where('id_detail', $id_detail)
+            ->update(['sub_total' => $subtotal]);
+        return redirect('/reservations/'.$id_reservation);
     }
 }
