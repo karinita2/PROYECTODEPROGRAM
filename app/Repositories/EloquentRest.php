@@ -30,16 +30,12 @@ class EloquentRest implements RoomRepository
      */
     public function getRoomTypes()
     {
-
-
         try{
             $json = file_get_contents('https://checki.herokuapp.com/api/tasks');
             $obj = json_decode($json);
-
-            return ($obj->data);
+            return ($obj);
         } catch(\Exception $e)
         {
-            /*
             $search = \Request::get('search');
             $rooms = DB::table('rooms')
                 ->leftjoin('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
@@ -49,17 +45,9 @@ class EloquentRest implements RoomRepository
                 ->orWhere('room_types.room_type','like','%'.$search.'%')
                 ->orWhere('rooms.availability','like','%'.$search.'%')
                 ->orderBy('id_room','asc')
-                ->paginate(5);
-            */
-            $rooms="Detail";
+                ->get();
             return $rooms;
-
-
         }
-
-
-
-
     }
 
     /**
