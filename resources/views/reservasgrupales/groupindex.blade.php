@@ -23,9 +23,6 @@
             z-index: 10000;
         }
     </style>
-    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
-    <link href="assets/plugins/google-code-prettify/prettify.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
 @endsection
 @section('middle-content')
     <div class="row">
@@ -58,8 +55,7 @@
                         </div>
 
 
-                    </div>
-                    <div class="row">
+
                         <div class="input-field col s5">
                             <input placeholder="Ingrese cantidad de personas" id="cantidadPersonas" name="cantidadPersonas" type="text" class="validate">
                             <label for="cantidadPersonas" class="active">Numero de Personas</label>
@@ -104,6 +100,7 @@
 @endsection
 
 
+
 @section('js')
 
 
@@ -117,7 +114,6 @@
 
 
     <script src="{{ asset('assets/plugins/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/js/alpha.min.js') }}"></script>
     <script src="{{ asset('assets/js/ajax_user2.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
@@ -160,7 +156,7 @@
         function check_availbility(){
             call_loader();
             $.ajax({
-                url: '{{ url('/roomsearch') }}',
+                url: '{{ url('/roomsearch2') }}',
                 type:'POST',
                 data:$('#formReservationStore').serialize(),
                 success:function(result){
@@ -185,7 +181,7 @@
         function get_order_data(){
             call_loader();
             $.ajax({
-                url: '{{ url('/addReservation') }}',
+                url: '{{ url('/addReservation2') }}',
                 type:'POST',
                 data:$('#formReservationStore').serialize(),
                 success:function(result){
@@ -226,7 +222,7 @@
                     $("#load").html("<div class='circle-clipper left'><div class='circle'></div></div>");
                     $.post({
                         type : "POST",
-                        url : '{{ url('/reservation/store') }}',
+                        url : '{{ url('/groupreservation/store') }}',
                         data : {
                             '_token': 		$('input[name=_token]').val(),
                             'ndi':			$('#carnet').val(),

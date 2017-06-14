@@ -61,3 +61,7 @@ Route::get('/reservasgrupales', 'GroupController@index')->middleware('auth');
 Route::post('/addUser2', 'GroupController@storeEncargado')->middleware('auth');
 Route::get('/buscarEncargado', 'GroupController@autocompleteEncargado');
 Route::post('/groupreservation/store','GroupController@store');
+Route::post('/roomsearch2', 'GroupController@searchRooms');
+Route::get('/groupreservations/{reservation}', 'GroupController@editReservations');
+Route::post('/addreservation2', 'GroupController@addReservation');
+Route::post('/addRoom2', 'GroupController@addRoom');
