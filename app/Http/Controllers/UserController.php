@@ -59,7 +59,7 @@ class UserController extends Controller
 
 
         $model = Person::all()->last();
-        $role = 1;
+        $role = $request->rolec;
         $user = new User();
 #'name'              => $data['name'],
         $user->email       = $request->email;
@@ -68,10 +68,6 @@ class UserController extends Controller
         $user->person_id   = $model->id_person;
         $user->save();
         return response()->json($person);
-
-
-
-
 
     }
 

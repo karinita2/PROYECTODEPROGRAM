@@ -55,7 +55,9 @@ $("#createuserbutton").click(function () {
     $('#createusermodal').openModal(true);
 });
 $("#crumbutton").click(function() {
-
+    var values = $('#sexc').val();
+    var roles = $('#rolc').val();
+    alert(values);
     $.ajax({
         type: 'post',
         url: '/addUser',
@@ -64,10 +66,11 @@ $("#crumbutton").click(function() {
             'name': $('input[name=namec]').val(),
             'last_name': $('input[name=last_namec]').val(),
             'phone':$('input[name=phonec]').val(),
-            'sex':$('input[name=sexc]').val(),
+            'sex':values,
             'nationality':$('input[name=nationalityc]').val(),
             'email':$('input[name=emailc]').val(),
-            'password':$('input[name=passwordc]').val()
+            'password':$('input[name=passwordc]').val(),
+            'rolec':roles
         },
         success: function(data) {
             if ((data.errors)) {
@@ -80,6 +83,7 @@ $("#crumbutton").click(function() {
                     "<td>" +
                     "<button class='btn btn-warning btn-detail edit-modal' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'> <i class='material-icons dp48'>settings</i></button> " +
                     "<button class='waves-effect waves-light btn red delete-modal' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><i class='material-icons dp48'>delete</i></button></td></tr>");
+                swal("Buen trabajo!", "Se creo al usuario exitosamente", "success");
             }
 
 

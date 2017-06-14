@@ -1,6 +1,6 @@
 <div id="createusermodal" class="modal">
     <div class="modal-content">
-        <h4><b>EDITAR USUARIO</b></h4>
+        <h4><b>CREAR USUARIO</b></h4>
         <div class="col s12 m12 l6">
             <div class="card">
                 <div class="card-content">
@@ -23,8 +23,14 @@
                                 <label for="first_name" class="active">Telefono</label>
                             </div>
                             <div class="input-field col s4">
-                                <input placeholder="Sexo" id="sexc" name="sexc" type="text" class="validate">
-                                <label for="first_name" class="active">Sexo</label>
+                                <div class="select-wrapper">
+                                    <select class="initialized" id="sexc" name="sexc">
+                                        <option value="">Elige una opción</option>
+                                        <option value="masculino">Masculino</option>
+                                        <option value="femenino">Femenino</option>
+                                    </select>
+                                    <label>Sexo</label>
+                                </div>
                             </div>
                             <div class="input-field col s4">
                                 <input placeholder="Nacionalidad" id="nationalityc" name="nationalityc" type="text" class="validate">
@@ -43,6 +49,17 @@
                             <div class="input-field col s4">
                                 <input placeholder="repetir password" id="repasswordc" name="repasswordc" type="password" class="validate">
                                 <label for="first_name" class="active">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="select-wrapper">
+                                <select class="initialized" id="rolc" name="rolc">
+                                    <option value="">Elige una opción</option>
+                                    <option value="1">Cliente</option>
+                                    <option value="3">Recepcionista</option>
+                                    <option value="2">Gerente</option>
+                                </select>
+                                <label>Rol</label>
                             </div>
                         </div>
                         <!-- <div class="row">
