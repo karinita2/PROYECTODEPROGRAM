@@ -46,6 +46,7 @@ Route::get('/reservations/{reservation}', 'ReservationController@editReservation
 Route::post('/addRoom', 'ReservationController@addRoom');
 Route::post('/addServices', 'ReservationController@addServices');
 Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+Route::get('/reservationList','ReservationController@lista');
 
 
 Route::get('/list','ListController@index');

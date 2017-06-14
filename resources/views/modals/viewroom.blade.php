@@ -14,7 +14,7 @@
                             </div>
                             <div class="input-field col s6">
                                 <input placeholder="Tipo de habitacion" id="room_type" type="label" class="validate" disabled>
-                                <label for="room_type" class="active">Apellido</label>
+                                <label for="room_type" class="active">Tipo de Habitación</label>
                             </div>
                         </div>
 
