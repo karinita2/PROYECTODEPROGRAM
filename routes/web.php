@@ -44,6 +44,9 @@ Route::get('/buscarCliente', 'ReservationController@autocompleteCliente');
 Route::post('/roomsearch', 'ReservationController@searchRooms');
 Route::get('/reservations/{reservation}', 'ReservationController@editReservations');
 Route::post('/addRoom', 'ReservationController@addRoom');
+Route::post('/addServices', 'ReservationController@addServices');
+Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+
 
 Route::get('/list','ListController@index');
 // ruta de autocomplete
