@@ -19,16 +19,10 @@ use Illuminate\Support\Facades\Mail;
 
 //pagina web
 Route::get('/', 'WebpageController@index');
-
 Route::get('/login', 'LoginController@index');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
-
 Route::get('/room','RoomController@index');
-
-
 
 Route::resource('user', 'UserController');
 Route::get('/user', 'UserController@index')->middleware('auth');
