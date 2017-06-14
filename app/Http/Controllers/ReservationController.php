@@ -42,8 +42,11 @@ class ReservationController extends Controller
     //Funcion para index de reservacion cliente
     public function clientreservation()
     {
-        return view('reservation.clientreservation');
+        $roomTypes = DB::table('room_types')
+            ->get();
+        return view('reservation.clientreservation', compact('roomTypes'));
     }
+
     public function create()
     {
         return view('reservation.register');
@@ -251,15 +254,17 @@ class ReservationController extends Controller
             $price = 0;
         }
 
-        $search = "<table class='responsive-table'>";
-        $search .= "<tbody>";
-        $search .= "<tr><th data-field='id'>Numero de Habitaciones</th><th >1</th></tr>";
-        $search .= "<tr><th data-field='id'>Numero de Adultos</th><th >$cantidadAdulto</th></tr>";
-        $search .= "<tr><th data-field='id'>Numero de Ninos</th><th >$cantidadNino</th></tr>";
-        $search .= "<tr><th data-field='id'>Noches</th><th ></th></tr>";
-        $search .= "<tr><th data-field='id'>Precio por noche</th><th >$price</th></tr>";
-        $search .= "</tbody>";
-        $search .= "</table>";
+        $search = "<div class=\"col s6 m6 l6 left\">";
+        $search .= " <p><b>HABITACION DISPONIBLE</b></p>";
+        $search .= "<p>Tipo de Habitacion : $data->room_type</p>";
+        $search .= "<p>Precio por noche : $data->price</p>";
+        $search .= "<p>Cantidad de Personas: $data->quantity</p>";
+        $search .= "<p>Numero de Adultos: $cantidadAdulto </p>";
+        $search .= "<p>Numero de Ninos: $cantidadNino </p>";
+        $search .= "<br>";
+        $search .= "</div>";
+
+
         return response()->json(['x'=> $result,'search'=>$search]);
     }
 
