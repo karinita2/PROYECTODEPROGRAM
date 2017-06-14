@@ -102,9 +102,12 @@ class ReservationController extends Controller
     }
 
 
-    public function show($id)
+    public function show()
     {
     //
+        $reservation = DB::table('reservations')
+            ->get();
+        return response()->json($reservation);
     }
 
 
@@ -352,7 +355,12 @@ class ReservationController extends Controller
 
         return response()->json(['result'=> true]);
     }
-
+    public function ApiGetReservation()
+    {
+        $reservation = DB::table('reservations')
+            ->get();
+        return response()->json($reservation);
+    }
     public function deleteDetail(Request $request)
     {
        ServicesDetails::where('detail_id',$request->id)->delete();

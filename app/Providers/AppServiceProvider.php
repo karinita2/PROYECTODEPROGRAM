@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Repositories\EloquentRest;
+use App\Repositories\RoomRepository;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->singleton(RoomRepository::class, EloquentRest::class);
     }
 }

@@ -49,9 +49,6 @@
                                 <td>
                                     <button class="btn btn-warning btn-detail edit-modal"
                                             data-id_room        = "{{ $key->id_room }}"
-                                            data-id_reservation = "{{ $key->id_reservation }}"
-                                            data-ckechout       = "{{ $key->ckechout}}"
-                                            data-ckechin        = "{{ $key->ckechin }}"
                                             data-name           = "{{ $key->name}}"
                                             data-room_type      = "{{ $key->room_type }}"
                                             data-availability   = "{{ $key->availability }}">
@@ -64,7 +61,6 @@
                         </tbody>
                     </table>
 
-                    {{ $rooms->links() }}
                 </div>
             </div>
         </div>
