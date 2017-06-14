@@ -61,6 +61,7 @@ Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
 // rutas para reservas grupales
 Route::resource('/reservasgrupales','GroupController');
+Route::post('/availability','ReservationController@availability');
 Route::get('/reservasgrupales', 'GroupController@index')->middleware('auth');
 Route::post('/addUser2', 'GroupController@storeEncargado')->middleware('auth');
 Route::get('/buscarEncargado', 'GroupController@autocompleteEncargado');
