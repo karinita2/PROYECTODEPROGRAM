@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Details;
+use App\Preferencial;
 use App\Reservations;
 use App\Rooms;
 use App\RoomTypes;
@@ -11,6 +12,7 @@ use App\ServicesDetails;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -25,9 +27,13 @@ class ReservationController extends Controller
      *
      */
     public function lista(){
+
+        $search = \Request::get('search');
         $details = DB::table('details')
             ->join('reservations','reservations.id_reservation','=','details.reservation_id')
             ->join('rooms','rooms.id_room','=','details.room_id')
+            ->where('rooms.name','like','%'.$search.'%')
+            ->orWhere('details.id_detail','like','%'.$search.'%')
             ->join('room_types','room_types.id_room_type','=','rooms.room_type_id')
             ->orderBy('id_detail','asc')
             ->paginate(10);
@@ -114,6 +120,18 @@ class ReservationController extends Controller
     return redirect('/reservations/'.$reservation_id->id_reservation);
     }
 
+    public function availability(Request $request)
+    {
+
+            $data = DB::table('rooms')
+                ->where('availability','available')
+                ->where('quantity',">=",$request->quantity)
+                ->where('room_type_id',$request->room_type_id)
+                ->count();
+
+        return response()->json($data);
+
+    }
 
     public function show()
     {
@@ -127,6 +145,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
     //
+
     }
 
     public function update(Request $request, $id)
@@ -444,5 +463,65 @@ class ReservationController extends Controller
         Details::where('id_detail', $id_detail)
             ->update(['sub_total' => $subtotal]);
         return redirect('/reservations/'.$id_reservation);
+    }
+
+    public function saveReservation(Request $request)
+    {
+        $id_reservation = $request->input('reservation');
+        $total = $request->input('total_reservation');
+        $id = $request->input('user_id');
+        Reservations::where('id_reservation', $id_reservation)
+            ->update(['total'=>$total]);
+        $preferencial = new Preferencial();
+        $preferencial->user_id = $id;
+        $preferencial->save();
+
+        $users = DB::table('users')
+            ->join('people', 'people.id_person', '=', 'users.person_id')
+            ->join('roles', 'roles.id_role', '=', 'users.role_id')
+            ->where('users.id' ,'=', $id)
+            ->first();
+        $reservation = DB::table('reservations')
+            ->where('reservations.id_reservation', '=', $id_reservation)
+            ->first();
+        Mail::send('emails.reserva', [
+            'name' => $users->name. ' '.$users->last_name,
+            'codigo'=>'uL2IOOY6CKJc0k6',
+            'reserva' => $reservation->created_at,
+            'checkin' => $reservation->ckechin,
+            'checkout' => $reservation->ckechout,
+            'Telefono' => ' +591657321488',
+            'total' => $reservation->total], function ($message){
+            $message->to('joel.a.rojas.v@gmail.com', 'Joel ROjas')
+                ->from('hotel@empresarial.com')
+                ->subject('Hotel Empresarial - Reserva');
+        });
+
+        return redirect('/list/'.$id_reservation);
+    }
+
+    public function viewReservation($id_reservation)
+    {
+        $roomTypes = DB::table('room_types')
+            ->get();
+        $details = DB::table('details')
+            ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->where('details.reservation_id', '=',$id_reservation)
+            ->get();
+        $reservation = DB::table('reservations')
+            ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->join('people', 'people.id_person' , '=', 'users.person_id')
+            ->where('reservations.id_reservation', '=', $id_reservation)
+            ->first();
+        $service = DB::table('services_details')
+            ->leftJoin('services', 'services.id_service', '=', 'services_details.service_id')
+            ->leftJoin('details', 'details.id_detail', '=', 'services_details.detail_id')
+            ->where('details.reservation_id', '=',$id_reservation )
+            ->get([
+                'services_details.*',
+                'services.*'
+            ]);
+        return view('reservation.viewReservation', compact('details', 'reservation', 'roomTypes', 'service'));
     }
 }

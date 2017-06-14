@@ -18,7 +18,7 @@
 
     <!-- Google Open Sans Font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-
+    <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <!-- Font Awesome -->
     <link href="assets/webpage/bower_components/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
 
@@ -453,6 +453,7 @@
             </div>
             <div class="row">
                 <!--Rate 1 start-->
+                {{ csrf_field() }}
                 @foreach($packs as $pack)
                 <div class="col-md-3 rate-box">
                     <div class="rate-icon">
@@ -466,12 +467,8 @@
                         <div class="rate-price-currency">Bs</div>
                         <div class="rate-price-amount">{{ $pack->price }}</div>
                         <div class="clearfix"></div>
-                        <button class="btn btn-warning btn-detail viewpack" id="viewpack"
-                                data-idpack         = "{{ $pack->id_pack }}"
-                                data-pack           = "{{ $pack->pack}}"
-                                data-price          = "{{ $pack->price}}">
-                            <i class="material-icons dp48">detalle</i>
-                        </button>
+                        <div class="clearfix">{{$pack->description}}</div>
+
                     </div>
 
                 </div>
@@ -699,12 +696,12 @@
                         <div class="alert hidden" id="inquiry-form-msg"></div>
                         <div class="room-select">
                             <div class="input-group">
-                                <select name="inquiry-object" id="inquiry-object" class="form-control">
+                                <select name="inquiry-object" id="roomsearch" class="form-control">
                                     <option value="">Seleccione una habitación</option>
-                                    <option value="Single Room">Habitación simple</option>
-                                    <option value="The Cottage">Habitación doble</option>
-                                    <option value="Guest House">Habitación matrimonial</option>
-                                    <option value="The Sea Villa">Suite</option>
+                                    <option value="3">Habitación simple</option>
+                                    <option value="2">Habitación doble</option>
+                                    <option value="1">Habitación matrimonial</option>
+                                    <option value="4">Suite</option>
                                 </select>
                             </div>
                         </div>
@@ -715,7 +712,7 @@
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                                    <input type="text" class="form-control datepicker" name="inquiry-date-check-in" id="inquiry-date-check-in" placeholder="Fecha: mm/dd/yyyy">
+                                    <input type="text" class="form-control datepicker" name="inquiry-date-check-in" id="date-check-in" placeholder="Fecha: mm/dd/yyyy">
                                 </div>
                             </div>
                         </div>
@@ -725,7 +722,7 @@
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                                    <input type="text" class="form-control datepicker" name="inquiry-date-check-out" placeholder="Fecha: mm/dd/yyyy" id="inquiry-date-check-out">
+                                    <input type="text" class="form-control datepicker" name="date-check-out" placeholder="Fecha: mm/dd/yyyy" id="date-check-out">
                                 </div>
                             </div>
                         </div>
@@ -737,13 +734,13 @@
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-user-follow"></i></span>
-                                    <select name="inquiry-children" class="form-control" id="inquiry-children">
-                                        <option value="Without children">Sin niños</option>
-                                        <option value="1 - Child">1 - Niño</option>
-                                        <option value="2 - Children">2 - Niños</option>
-                                        <option value="3 - Children">3 - Niños</option>
-                                        <option value="4 - Children">4 - Niños</option>
-                                        <option value="5 - Children">5 - Niños</option>
+                                    <select name="inquiry-children" class="form-control" id="children">
+                                        <option value="0">Sin niños</option>
+                                        <option value="1">1 - Niño</option>
+                                        <option value="2">2 - Niños</option>
+                                        <option value="3">3 - Niños</option>
+                                        <option value="4">4 - Niños</option>
+                                        <option value="5">5 - Niños</option>
                                     </select>
                                 </div>
                             </div>
@@ -753,13 +750,13 @@
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="icon-user-follow"></i></span>
-                                    <select name="inquiry-adults" class="form-control" id="inquiry-adults">
-                                        <option value="1 - Adult">1 - Adulto</option>
-                                        <option value="2 - Adult">2 - Adultos</option>
-                                        <option value="3 - Adult">3 - Adultos</option>
-                                        <option value="4 - Adult">4 - Adultos</option>
-                                        <option value="5 - Adult">5 - Adultos</option>
-                                        <option value="6 - Adult">6 - Adultos</option>
+                                    <select name="inquiry-adults" class="form-control" id="adults">
+                                        <option value="1">1 - Adulto</option>
+                                        <option value="2">2 - Adultos</option>
+                                        <option value="3">3 - Adultos</option>
+                                        <option value="4">4 - Adultos</option>
+                                        <option value="5">5 - Adultos</option>
+                                        <option value="6">6 - Adultos</option>
                                     </select>
                                 </div>
                             </div>
@@ -775,7 +772,7 @@
 
                 <!-- Modal footer start -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-inquiry-submit">Buscar</button>
+                    <button type="submit" class="btn btn-inquiry-submit" id="buscar">Buscar</button>
                 </div>
                 <!-- Modal footer end -->
 
@@ -785,19 +782,57 @@
 </div>
 <!--Inquiry Modal end-->
 
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-@section('js')
-<script src="assets/webpage/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-<script type="text/javascript">
-    $('#viewpack').on('click', function(){
-        // $('#id').val($(this).data('id'));
-        // $('#email').val($(this).data('email'));
-        // $('#password').val($(this).data('password'));
-        // $('#role').val($(this).data('role'));
 
-        $('#viewpackmodal').openModal(true);
+<script src="assets/webpage/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $('#buscar').on('click', function(){
+        $.ajax({
+            type: 'post',
+            url: '/availability',
+            data:{
+                '_token': $('input[name=_token]').val(),
+                'quantity': $("#adults").val() + $("#children").val(),
+                'room_type_id': $("#roomsearch").val(),
+
+            },
+            success:function(data) {
+                if(data)
+                {
+                    swal("Porfavor ingrese con su cuenta para continuar");
+                    window.location.href = '/login';
+                }else
+                {
+                    swal("No hay habitaciones disponibles");
+                }
+
+
+
+
+                //;
+/*                $('.item' + data.id_pack).replaceWith(
+                    "<tr class='item>"+data.id_pack+"'>"+
+                    "<td>"+data.pack+"</td>"+
+                    "<td>"+data.price+"</td>"+
+                    "<td>"+"<button class='waves-effect waves-light btn edit-pack' " +
+                    "data-idpack='" + data.id_pack +
+                    "' data-pack='" + data.pack +
+                    "' data-price='" + data.price +
+                    "'>" +
+                    "<i class='material-icons dp48'>settings</i></button> " +
+                    "<button class='waves-effect waves-light btn red delete-modal' " +
+                    "data-id_pack='" + data.id_pack +
+                    "' data-pack='" + data.pack +
+                    "' data-price='" + data.price +
+                    "'>" +
+                    "<i class='material-icons dp48'>delete</i></button></td>" +
+                    "</tr>" + + swal("Buen trabajo!", "Se realizo correctame los cambios.!", "success"));
+*/
+            }
+        });
     });
 </script>
 <script src="assets/webpage/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
@@ -805,8 +840,10 @@
 <script src="assets/webpage/bower_components/jquery-animatenumber/jquery.animateNumber.min.js"></script>
 <script src="assets/webpage/bower_components/bootstrap-3-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="assets/webpage/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="assets/webpage/js/custom.js"></script>
-@endsection
+
+
 </body>
 </html>

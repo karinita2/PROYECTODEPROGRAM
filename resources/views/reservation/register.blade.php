@@ -59,7 +59,7 @@
                                                 <td>{{$detail->name}}</td>
                                                 <td>{{$detail->price}}</td>
                                                 <td>{{$detail->nights}}</td>
-                                                <td>cuna, cama</td>
+                                                <td></td>
                                                 <td>
                                                     <button class="waves-effect waves-light btn green edit-modal"
                                                             data-id_reservation    = "{{ $reservation->id_reservation }}"
@@ -78,17 +78,30 @@
                                             @extends('modals.editDetail')
                                             @extends('modals.deleteDetail')
                                         @endforeach()
-
+                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$reservation->id_reservation}}">
+                                        <input type="hidden" id="id_user" name="id_user" value="{{$reservation->user_id}}">
                                         <tr>
                                             <td colspan="6" style="text-align: right"><b>Total:</b></td>
-                                            <td>{{$total}}</td>
+                                            <td><input type="hidden" id="total" name="total" value="{{$total}}">{{$total}}</td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <form action="{{ url('/saveReservation') }}" method="POST" id="aceptar">
+                                    {{csrf_field()}}
+                                    <input type="hidden" id="total_reservation" name="total_reservation">
+                                    <input type="hidden" id="reservation" name="reservation">
+                                    <input type="hidden" id="user_id" name="user_id">
+                                    <div class="col s12 m12 l12 center">
+                                        <button class="waves-effect waves-light btn green" type="submit" id="aceptar">ACEPTAR</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-
             </div>
         </div>
         <div class="col s12 m12 l5">
@@ -168,6 +181,20 @@
             <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 
             <script type="text/javascript">
+                $(document).ready(function(){
+
+                    $("#aceptar").click(function () {
+                        //saco el valor accediendo a un input de tipo text y name = nombre2 y lo asigno a uno con name = nombre3
+                        var total = $("#total").val();
+                        var id_reservation = $("#reservation_id").val();
+                        var id = $('#id_user').val();
+                        $('#total_reservation').val(total);
+                        $('#reservation').val(id_reservation);
+                        $('#user_id').val(id);
+                    });
+                    //var resultado = au - ao;
+                    //  $("#cambio").val($("#total-venda").val());
+                });
                 $(document).on('click', '.edit-modal', function() {
                     $('#id_reservation').val($(this).data('id_reservation'));
                     $('#id_detail').val($(this).data('id_detail'));
