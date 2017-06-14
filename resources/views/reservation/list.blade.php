@@ -16,7 +16,7 @@
                     <span class="card-title">Lista</span>
                     <br>
                     <div>
-                        {{ Form::open(['method' => 'GET','url'=>'room','class'=>'navbar-form navbar-left','role'=>'search']) }}
+                        {{ Form::open(['method' => 'GET','url'=>'reservationList','class'=>'navbar-form navbar-left','role'=>'search']) }}
                         <div>
                             <input type="text" name="search" class="input-field col s4" placeholder="Buscar ...">
                             <span class="input-group-btn">
