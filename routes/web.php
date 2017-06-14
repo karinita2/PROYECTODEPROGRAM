@@ -53,6 +53,7 @@ Route::post('/addreservation', 'ReservationController@addReservation');
 Route::get('/pack','PackController@index');
 Route::post('/findUser','UserController@findUser');
 Route::resource('pack','PackController');
+Route::post('/addPack','PackController@store');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
 // rutas para reservas grupales

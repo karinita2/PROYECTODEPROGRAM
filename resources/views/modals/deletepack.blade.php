@@ -1,8 +1,8 @@
 <!-- Modal Structure -->
 <div id="deletepackmodal" class="modal">
     <div class="modal-content">
-        <h4>Eliminar pack</h4>
-        <p>Desea eliminar al usuario <span class="name"></span> ? </p>
+        <h4>Eliminar paquete</h4>
+        <p>¿Desea eliminar el paquete <span class="name"></span> ? </p>
         <span id="id"></span>
         <input type="hidden" id="id_pack" class="validate">
     </div>

@@ -15,7 +15,9 @@ class PackController extends Controller
     public function index()
     {
         $packs = DB::table('packs')
-            ->get();
+
+            ->paginate(6);
+
         return view('pack.read', compact('packs'));
     }
 
@@ -38,13 +40,12 @@ class PackController extends Controller
     public function store(Request $request)
     {
         $pack=new Pack();
-
         $pack->pack        = $request->pack;
         $pack->price       = $request->price;
         $pack->description = $request->description;
 
         $pack->save();
-
+        $pack = Pack::all()->last();
         return response()->json($pack);
 
     }

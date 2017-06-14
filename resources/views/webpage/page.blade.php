@@ -453,6 +453,7 @@
             </div>
             <div class="row">
                 <!--Rate 1 start-->
+                @foreach($packs as $pack)
                 <div class="col-md-3 rate-box">
                     <div class="rate-icon">
                         <div class="stars">
@@ -460,75 +461,23 @@
                         </div>
                         <i class="fa fa-bed"></i>
                     </div>
-                    <div class="rate-description">Individual</div>
+                    <div class="rate-description">{{ $pack->pack }}</div>
                     <div class="rate-price">
-                        <div class="rate-price-currency">BOB</div>
-                        <div class="rate-price-amount">150</div>
-                        <div class="rate-price-duration">Noche</div>
+                        <div class="rate-price-currency">Bs</div>
+                        <div class="rate-price-amount">{{ $pack->price }}</div>
                         <div class="clearfix"></div>
+                        <button class="btn btn-warning btn-detail viewpack" id="viewpack"
+                                data-idpack         = "{{ $pack->id_pack }}"
+                                data-pack           = "{{ $pack->pack}}"
+                                data-price          = "{{ $pack->price}}">
+                            <i class="material-icons dp48">detalle</i>
+                        </button>
                     </div>
+
                 </div>
                 <!--Rate 1 end-->
-
-                <!--Rate 2 start-->
-                <div class="col-md-3 rate-box">
-                    <div class="rate-icon">
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <i class="fa fa-bed"></i>
-                    </div>
-                    <div class="rate-description">Familiar</div>
-                    <div class="rate-price">
-                        <div class="rate-price-currency">BOB</div>
-                        <div class="rate-price-amount">300</div>
-                        <div class="rate-price-duration">Noche</div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <!--Rate 2 end-->
-
-                <!--Rate 3 start-->
-                <div class="col-md-3 rate-box">
-                    <div class="rate-icon">
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <i class="fa fa-bed"></i>
-                    </div>
-                    <div class="rate-description">Grupal</div>
-                    <div class="rate-price">
-                        <div class="rate-price-currency">BOB</div>
-                        <div class="rate-price-amount">360</div>
-                        <div class="rate-price-duration">Noche</div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <!--Rate 3 end-->
-
-                <!--Rate 4 start-->
-                <div class="col-md-3 rate-box">
-                    <div class="rate-icon">
-                        <div class="stars">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <i class="fa fa-bed"></i>
-                    </div>
-                    <div class="rate-description">Empresarial</div>
-                    <div class="rate-price">
-                        <div class="rate-price-currency">BOB</div>
-                        <div class="rate-price-amount">499</div>
-                        <div class="rate-price-duration">Noche</div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <!--Rate 4 end-->
+                    @extends('modals.viewroom')
+                @endforeach
             </div>
             <div class="row">
                 <div class="col-md-12 rates-payment-info">
@@ -838,8 +787,19 @@
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+@section('js')
 <script src="assets/webpage/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">
+    $('#viewpack').on('click', function(){
+        // $('#id').val($(this).data('id'));
+        // $('#email').val($(this).data('email'));
+        // $('#password').val($(this).data('password'));
+        // $('#role').val($(this).data('role'));
 
+        $('#viewpackmodal').openModal(true);
+    });
+</script>
 <script src="assets/webpage/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
 <script src="assets/webpage/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
 <script src="assets/webpage/bower_components/jquery-animatenumber/jquery.animateNumber.min.js"></script>
@@ -847,6 +807,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="assets/webpage/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="assets/webpage/js/custom.js"></script>
-
+@endsection
 </body>
 </html>
