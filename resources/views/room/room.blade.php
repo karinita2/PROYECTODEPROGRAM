@@ -40,19 +40,27 @@
                         </thead>
 
                         <tbody>
-                        {{print_r($rooms)}}
                         @foreach($rooms as $key )
                             <tr>
-                                <td> {{ $key->id }}</td>
-                                <td> {{ $key->task }}</td>
-                                <td> {{ $key->task_description}}</td>
-
-
+                                <td> {{ $key->id_room }}</td>
+                                <td>{{ $key->name }}</td>
+                                <td>{{ $key->room_type }}</td>
+                                <td>{{ $key->availability }}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-detail edit-modal"
+                                            data-id_room        = "{{ $key->id_room }}"
+                                            data-name           = "{{ $key->name}}"
+                                            data-room_type      = "{{ $key->room_type }}"
+                                            data-availability   = "{{ $key->availability }}">
+                                        Ver
+                                    </button>
+                                </td>
                             </tr>
                             @extends('modals.viewroom')
                         @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
