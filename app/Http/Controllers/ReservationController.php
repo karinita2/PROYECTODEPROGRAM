@@ -22,6 +22,23 @@ class ReservationController extends Controller
             ->get();
         return view('reservation.index', compact('roomTypes'));
     }
+
+    /**
+     *
+     */
+    public function lista(){
+
+        $search = \Request::get('search');
+        $details = DB::table('details')
+            ->join('reservations','reservations.id_reservation','=','details.reservation_id')
+            ->join('rooms','rooms.id_room','=','details.room_id')
+            ->where('rooms.name','like','%'.$search.'%')
+            ->orWhere('details.id_detail','like','%'.$search.'%')
+            ->join('room_types','room_types.id_room_type','=','rooms.room_type_id')
+            ->orderBy('id_detail','asc')
+            ->paginate(10);
+        return view ('reservation.list', compact('details'));
+    }
     //Funcion para index de reservacion cliente
     public function clientreservation()
     {

@@ -1,23 +1,22 @@
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4><b>EDITAR USUARIO</b></h4>
+        <h4><b>Estado de la Habitación</b></h4>
         <div class="col s12 m12 l6">
             <div class="card">
                 <div class="card-content">
-                    <span ><b>Datos Persona</b></span>
+                    <span ><b>Datos de la habitación</b></span>
                     <form class="col s12">
                         <div class="row">
                             <input type="hidden" id="id_room" class="validate">
                             <div class="input-field col s6">
-                                <input placeholder="" id="pack" type="label" class="validate" disabled>
-                                <label for="pack" class="active" >Nombres</label>
+                                <input id="pack" type="label" class="validate" disabled>
+                                <label id="pack"for="pack" class="active" >Nombre de la Habitación</label>
                             </div>
                             <div class="input-field col s6">
-                                <input placeholder="Tipo de habitacion" id="room_type" type="label" class="validate" disabled>
-                                <label for="room_type" class="active">Apellido</label>
+                                <input placeholder="Tipo de habitación" id="room_type" type="label" class="validate" disabled>
+                                <label for="room_type" class="active">Tipo de Habitación</label>
                             </div>
                         </div>
-
                         <div class="row">
                             <input type="hidden" id="id_reservation" class="validate">
                             <div class="input-field col s6">

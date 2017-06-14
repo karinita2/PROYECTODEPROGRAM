@@ -48,7 +48,9 @@ Route::get('/reservations/{reservation}', 'ReservationController@editReservation
 Route::post('/addRoom', 'ReservationController@addRoom');
 Route::post('/addServices', 'ReservationController@addServices');
 Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+
 Route::post('/saveReservation', 'ReservationController@saveReservation');
+
 
 Route::resource('/list','ListController');
 Route::get('/list','ListController@index');
@@ -71,10 +73,9 @@ Route::post('/addUser2', 'GroupController@storeEncargado')->middleware('auth');
 Route::get('/buscarEncargado', 'GroupController@autocompleteEncargado');
 Route::post('/groupreservation/store','GroupController@store');
 
-Route::get('welcome', function (){
- Mail::send('emails.reserva',['name' => 'Joel'], function ($message){
-     $message->to('joel.a.rojas.v@gmail.com', 'Joel ROjas')
-         ->from('joel.a.rojas.v@gmail.com')
-         ->subject('Reserva registrada correctamente.!');
- });
-});
+Route::post('/roomsearch2', 'GroupController@searchRooms');
+Route::get('/groupreservations/{reservation}', 'GroupController@editReservations');
+Route::post('/addreservation2', 'GroupController@addReservation');
+Route::post('/addRoom2', 'GroupController@addRoom');
+Route::post('/addAmbientes', 'GroupController@addAmbientes');
+

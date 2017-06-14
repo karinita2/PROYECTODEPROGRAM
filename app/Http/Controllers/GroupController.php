@@ -6,6 +6,7 @@ use App\Details;
 use App\Person;
 use App\Reservations;
 use App\Rooms;
+use App\ServicesDetails;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,8 +98,47 @@ class GroupController extends Controller
         ->join('users', 'users.id', '=', 'reservations.user_id')
         ->where('reservations.id_reservation', '=', $reservation_id->id_reservation)
         ->get();*/
-        return redirect('/reservations/'.$reservation_id->id_reservation);
+        return redirect('/groupreservations/'.$reservation_id->id_reservation);
     }
+
+    public function searchRooms(Request $request)
+    {
+        $cantidadAdulto = $request->input('cantidadAdulto');
+        if($request->input('cantidadNino'))
+        {
+            $cantidadNino   = $request->input('cantidadNino');
+        }
+        else{
+            $cantidadNino   = 0;
+        }
+        #$idPerson       = $request->input('id-person');
+        $roomType       = $request->input('room-type');
+        $quantity       = $cantidadAdulto + $cantidadNino;
+        # $checkIn        = $request->input('check_in');
+        # $checkOut       = $request->input('check_out');
+
+        $data = DB::table('rooms')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->where('room_types.id_room_type', '=', $roomType)
+            ->where('rooms.availability', '=', 'available')
+            ->where('rooms.quantity', '>=', $quantity)
+            ->first();
+        if(!empty($data))
+        {
+            $result = 1;
+            $price = $data->price;
+        }
+        else
+        {
+            $result = 0;
+            $price = 0;
+        }
+
+        $search = "<table class='responsive-table'>";
+        $search .= "</table>";
+        return response()->json(['x'=> $result,'search'=>$search]);
+    }
+
 
     public function storeEncargado(Request $request)
     {
@@ -169,6 +209,140 @@ class GroupController extends Controller
             $result[] = ['value' =>'Cliente : '.$value->last_name.' '.$value->name.' | NITCI: '.$value->ndi, 'id'=>$value->id];
         }
         return response()->json($result);
+    }
+
+
+    public function addReservation(Request $request)
+    {
+
+        $room_type_id = $request->input('room_type_id');
+        /*$sub_total = $request->input('precio');
+        $cantidad = 1;
+        $room_id = $request->input('room_id');*/
+        /*
+                $detail_room = array(
+                  'sub_total'   => $sub_total,
+                  'cantidad'    => $cantidad,
+                  'room_id'     => $room_id,
+                );*/
+        $roomType = RoomTypes::where('id_room_type',$room_type_id)
+            ->get();
+        foreach($roomType as $key)
+        {
+            echo json_encode(array('result' => true, 'roomType' => $key->room_type, 'price' => $key->price, 'cantidad' => $key->cantidad));
+        }
+    }
+
+    public function editReservations($id_reservation)
+    {
+        // $id_reservation = Reservations::all()->last();
+        $roomTypes = DB::table('room_types')
+            ->get();
+        $details = DB::table('details')
+            ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->where('details.reservation_id', '=',$id_reservation)
+            ->get();
+
+        $reservation = DB::table('reservations')
+            ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->join('people', 'people.id_person' , '=', 'users.person_id')
+            ->where('reservations.id_reservation', '=', $id_reservation)
+            ->first();
+
+        $service = DB::table('services_details')
+            ->leftJoin('services', 'services.id_service', '=', 'services_details.service_id')
+            ->leftJoin('details', 'details.id_detail', '=', 'services_details.detail_id')
+            ->where('details.reservation_id', '=',$id_reservation )
+            ->get([
+                'services_details.*',
+                'services.*'
+            ]);
+
+        return view('reservasgrupales.groupregister', compact('details', 'reservation', 'roomTypes','service'));
+    }
+
+    public function addRoom(Request $request)
+    {
+        $cantidadAdulto = $request->input('cantidadAdulto');
+        if($request->input('cantidadNino'))
+        {
+            $cantidadNino   = $request->input('cantidadNino');
+        }
+        else{
+            $cantidadNino   = 0;
+        }
+
+        $reservation_id = Reservations::all()->last();
+
+        $roomType       = $request->input('room-type');
+        $quantity       = $cantidadAdulto + $cantidadNino;
+        $data = DB::table('rooms')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->where('room_types.id_room_type', '=', $roomType)
+            ->where('rooms.availability', '=', 'available')
+            ->where('rooms.quantity', '>=', $quantity)
+            ->first();
+
+        $details = new Details();
+        $details->sub_total         = $data->price;
+        $details->nights            = 1;
+        $details->room_id           = $data->id_room;
+        $details->reservation_id    = $reservation_id->id_reservation;
+        $details->save();
+        Rooms::where('id_room', $data->id_room)
+            ->update(['availability' => 'check-in']);
+
+        return response()->json(['result'=> true]);
+    }
+
+    public function addAmbientes(Request $request)
+    {
+        $id_reservation = $request->input('id_reservation');
+        $id_detail = $request->input('id_detail');
+        $price = $request->input('price');
+        $contador = 0;
+        foreach ($request->input('service') as $services => $service)
+        {
+            if($contador == 0)
+            {
+                $decorator = new $service(new \Room($price));
+            }
+            else
+            {
+                $decorator = new $service($decorator);
+            }
+            $contador++;
+            if($service == 'Conferencia'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 15000;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Eventos') {
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 3000;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Reuniones'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 1500;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+
+        }
+        $subtotal = $decorator->getBaseCost();
+        Details::where('id_detail', $id_detail)
+            ->update(['sub_total' => $subtotal]);
+        return redirect('/groupreservations/'.$id_reservation);
     }
 
 
