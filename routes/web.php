@@ -69,3 +69,4 @@ Route::post('/roomsearch2', 'GroupController@searchRooms');
 Route::get('/groupreservations/{reservation}', 'GroupController@editReservations');
 Route::post('/addreservation2', 'GroupController@addReservation');
 Route::post('/addRoom2', 'GroupController@addRoom');
+Route::post('/addAmbientes', 'GroupController@addAmbientes');

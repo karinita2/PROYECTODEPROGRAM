@@ -2,6 +2,9 @@
 @extends('layouts.head')
 @section('css')
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="{{asset('assets/plugins/material-preloader/css/materialPreloader.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/google-code-prettify/prettify.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('middle-content')
 
@@ -10,21 +13,22 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row">
+
                         <div class="center"><p><b>DETALLES DE LA RESERVA</b></p></div><br>
                         <div class="row">
+
                             <div class="col s6 m6 l6">
-                                <p><b>CLIENTE</b></p>
-                                <p>Nombre : <b>Joel rojas </b></p>
-                                <p>Telefono : 77281259</p>
-                                <p>Documento : 11541321</p>
-                                <p>Correo : <b>joel.a.rojas.v@gmail.com</b></p>
+                                <p>Nombre       : <b> {{ $reservation->last_name. ' '.$reservation->name }} </b></p>
+                                <p>Telefono     :     {{ $reservation->phone}}</p>
+                                <p>Documento    :     {{ $reservation->ndi }}</p>
+                                <p>Correo       : <b> {{ $reservation->email }}</b></p>
+                                <p>Nacionalidad : {{ $reservation->nationality }}</p>
                             </div>
                             <div class="col s6 m6 l6 right">
                                 <p><b>HABITACIONES</b></p>
-                                <p>Fecha de la reserva:</p>
-                                <p>Check-In : </p>
-                                <p>Check-Out :</p>
-                                <p>Noches : </p>
+                                <p>Fecha de la reserva: {{ $reservation->date }}</p>
+                                <p>Check-In : {{ $reservation->ckechin }}</p>
+                                <p>Check-Out: {{ $reservation->ckechout }}</p>
                             </div>
                         </div>
                     </div>
@@ -40,6 +44,7 @@
                                         <th rowspan="1" colspan="1" style="width: 150px;">Habitaciones</th>
                                         <th rowspan="1" colspan="1" style="width: 70px;">Precio</th>
                                         <th rowspan="1" colspan="1" style="width: 80px;">Noches</th>
+                                        <th>Extras</th>
                                         <th rowspan="1" colspan="1" style="width: 100px;">Opciones</th>
                                         <th rowspan="1" colspan="1" style="width: 100px;">Sub-Total</th>
                                     </tr>
@@ -53,11 +58,24 @@
                                             <td>{{$detail->name}}</td>
                                             <td>{{$detail->price}}</td>
                                             <td>{{$detail->nights}}</td>
+                                            <td>cuna, cama</td>
                                             <td>
-                                                <a class="btn-floating red" style="transform: scaleY(1) scaleX(1) translateY(0px) translateX(0px); opacity: 1;"><i class="material-icons">not_interested</i></a>
+                                                <button class="waves-effect waves-light btn green edit-modal"
+                                                        data-id_reservation    = "{{ $reservation->id_reservation }}"
+                                                        data-id_detail         = "{{ $detail->id_detail }}"
+                                                        data-price             = "{{ $detail->price }}">
+                                                    <i class="material-icons dp48">settings</i>
+                                                </button>
+                                                <button class="waves-effect waves-light btn red delete-modal"
+                                                        data-id             = "{{ $detail->id_detail }}"
+                                                        data-id_room         = "{{ $detail->room_id }}">
+                                                    <i class="material-icons dp48">delete</i>
+                                                </button>
                                             </td>
                                             <td>{{$detail->sub_total}}</td>
                                         </tr>
+                                            @extends('modals.editAmbiente')
+                                            @extends('modals.deleteDetail')
                                     @endforeach()
                                     <tr>
                                         <td colspan="6" style="text-align: right"><b>Total:</b></td>
@@ -136,11 +154,42 @@
             <script src="{{asset('assets/plugins/materialize/js/materialize.min.js')}}"></script>
             <script src="{{asset('assets/plugins/material-preloader/js/materialPreloader.min.js')}}"></script>
             <script src="{{asset('assets/plugins/jquery-blockui/jquery.blockui.js')}}"></script>
+            <script src="{{asset('assets/plugins/google-code-prettify/prettify.js')}}"></script>
+            <script src="{{asset('assets/plugins/sweetalert/sweetalert.min.js')}}"></script>
             <script src="{{asset('assets/js/alpha.min.js')}}"></script>
             <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
             <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 
             <script type="text/javascript">
+                $(document).on('click', '.edit-modal', function() {
+                    $('#id_reservation').val($(this).data('id_reservation'));
+                    $('#id_detail').val($(this).data('id_detail'));
+                    $('#price').val($(this).data('price'));
+                    $('#modal3').openModal(true);
+                });
+
+                $(document).on('click', '.delete-modal', function() {
+                    $('#id').val($(this).data('id'));
+                    $('#id_room').val($(this).data('id_room'));
+                    $('#modal4').openModal(true);
+                });
+                $('.modal-footer').on('click', '.delete', function() {
+                    $.ajax({
+                        type: 'post',
+                        url: '/deleteDetail',
+                        data: {
+                            '_token'    : $('input[name=_token]').val(),
+                            'id'        : $("#id").val(),
+                            'id_room'   : $("#id_room").val(),
+                        },
+                        success: function(data) {
+                            $('.item' + $('#id').val()).remove();
+                            $("#tableReservation").load('{!! Request::url() !!} #tableReservation');
+                            swal("Eliminado!", "Se ha eliminado correctamente", "success");
+
+                        }
+                    });
+                });
                 function check_availbility(){
                     call_loader();
                     $.ajax({

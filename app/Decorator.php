@@ -70,3 +70,27 @@ class Limpieza extends RoomDecorator
         return $this->_producto->getBaseCost() + 100;
     }
 }
+
+class Conferencia extends RoomDecorator
+{
+    public function getBaseCost()
+    {
+        return $this->_producto->getBaseCost() + 15000;
+    }
+}
+
+class Eventos extends RoomDecorator
+{
+    public function getBaseCost()
+    {
+        return $this->_producto->getBaseCost() + 3000;
+    }
+}
+
+class Reuniones extends RoomDecorator
+{
+    public function getBaseCost()
+    {
+        return $this->_producto->getBaseCost() + 1500;
+    }
+}

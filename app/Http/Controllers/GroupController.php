@@ -6,6 +6,7 @@ use App\Details;
 use App\Person;
 use App\Reservations;
 use App\Rooms;
+use App\ServicesDetails;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -245,10 +246,20 @@ class GroupController extends Controller
 
         $reservation = DB::table('reservations')
             ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->join('people', 'people.id_person' , '=', 'users.person_id')
             ->where('reservations.id_reservation', '=', $id_reservation)
-            ->get();
+            ->first();
 
-        return view('reservasgrupales.groupregister', compact('details', 'reservation', 'roomTypes'));
+        $service = DB::table('services_details')
+            ->leftJoin('services', 'services.id_service', '=', 'services_details.service_id')
+            ->leftJoin('details', 'details.id_detail', '=', 'services_details.detail_id')
+            ->where('details.reservation_id', '=',$id_reservation )
+            ->get([
+                'services_details.*',
+                'services.*'
+            ]);
+
+        return view('reservasgrupales.groupregister', compact('details', 'reservation', 'roomTypes','service'));
     }
 
     public function addRoom(Request $request)
@@ -283,6 +294,55 @@ class GroupController extends Controller
             ->update(['availability' => 'check-in']);
 
         return response()->json(['result'=> true]);
+    }
+
+    public function addAmbientes(Request $request)
+    {
+        $id_reservation = $request->input('id_reservation');
+        $id_detail = $request->input('id_detail');
+        $price = $request->input('price');
+        $contador = 0;
+        foreach ($request->input('service') as $services => $service)
+        {
+            if($contador == 0)
+            {
+                $decorator = new $service(new \Room($price));
+            }
+            else
+            {
+                $decorator = new $service($decorator);
+            }
+            $contador++;
+            if($service == 'Conferencia'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 15000;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Eventos') {
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 3000;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Reuniones'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 1500;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+
+        }
+        $subtotal = $decorator->getBaseCost();
+        Details::where('id_detail', $id_detail)
+            ->update(['sub_total' => $subtotal]);
+        return redirect('/groupreservations/'.$id_reservation);
     }
 
 
