@@ -6,6 +6,8 @@ use App\Details;
 use App\Reservations;
 use App\Rooms;
 use App\RoomTypes;
+use App\Services;
+use App\ServicesDetails;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
@@ -73,9 +75,12 @@ class ReservationController extends Controller
         ->where('rooms.quantity', '>=', $quantity)
         ->first();
 
+
+        $days	= (strtotime($checkIn)-strtotime($checkOut))/86400;
+        $days 	= abs($days); $dias = floor($days);
         $details = new Details();
         $details->sub_total         = $data->price;
-        $details->nights            = 1;
+        $details->nights            = $days;
         $details->room_id           = $data->id_room;
         $details->reservation_id    = $reservation_id->id_reservation;
         $details->save();
@@ -294,16 +299,25 @@ class ReservationController extends Controller
             ->get();
         $details = DB::table('details')
             ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
-        ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
+            ->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
             ->where('details.reservation_id', '=',$id_reservation)
             ->get();
 
         $reservation = DB::table('reservations')
             ->join('users', 'users.id', '=', 'reservations.user_id')
+            ->join('people', 'people.id_person' , '=', 'users.person_id')
             ->where('reservations.id_reservation', '=', $id_reservation)
-            ->get();
+            ->first();
+        $service = DB::table('services_details')
+            ->leftJoin('services', 'services.id_service', '=', 'services_details.service_id')
+            ->leftJoin('details', 'details.id_detail', '=', 'services_details.detail_id')
+            ->where('details.reservation_id', '=',$id_reservation )
+            ->get([
+                'services_details.*',
+                'services.*'
+            ]);
 
-        return view('reservation.register', compact('details', 'reservation', 'roomTypes'));
+        return view('reservation.register', compact('details', 'reservation', 'roomTypes', 'service'));
     }
     public function addRoom(Request $request)
     {
@@ -337,5 +351,77 @@ class ReservationController extends Controller
             ->update(['availability' => 'check-in']);
 
         return response()->json(['result'=> true]);
+    }
+
+    public function deleteDetail(Request $request)
+    {
+       ServicesDetails::where('detail_id',$request->id)->delete();
+       Details::where('id_detail',$request->id)->delete();
+        Rooms::where('id_room', $request->id_room)
+            ->update(['availability' => 'available']);
+       return response()->json($request->id);
+    }
+    public function addServices(Request $request)
+    {
+       $id_reservation = $request->input('id_reservation');
+       $id_detail = $request->input('id_detail');
+       $price = $request->input('price');
+        $contador = 0;
+        foreach ($request->input('service') as $services => $service)
+        {
+            if($contador == 0)
+            {
+                $decorator = new $service(new \Room($price));
+            }
+            else
+            {
+                $decorator = new $service($decorator);
+            }
+            $contador++;
+            if($service == 'Cuna'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Cama') {
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 300;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Wifi'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Restaurante'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+            if($service == 'Limpieza'){
+                $id_service = $contador;
+                $serviceDetails = new ServicesDetails();
+                $serviceDetails->sub_total = 150;
+                $serviceDetails->service_id = $id_service;
+                $serviceDetails->detail_id = $id_detail;
+                $serviceDetails->save();
+            }
+        }
+        $subtotal = $decorator->getBaseCost();
+        Details::where('id_detail', $id_detail)
+            ->update(['sub_total' => $subtotal]);
+        return redirect('/reservations/'.$id_reservation);
     }
 }

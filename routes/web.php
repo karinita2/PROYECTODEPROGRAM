@@ -44,6 +44,9 @@ Route::get('/buscarCliente', 'ReservationController@autocompleteCliente');
 Route::post('/roomsearch', 'ReservationController@searchRooms');
 Route::get('/reservations/{reservation}', 'ReservationController@editReservations');
 Route::post('/addRoom', 'ReservationController@addRoom');
+Route::post('/addServices', 'ReservationController@addServices');
+Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+
 
 Route::get('/list','ListController@index');
 // ruta de autocomplete
@@ -53,6 +56,7 @@ Route::post('/addreservation', 'ReservationController@addReservation');
 Route::get('/pack','PackController@index');
 Route::post('/findUser','UserController@findUser');
 Route::resource('pack','PackController');
+Route::post('/addPack','PackController@store');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
 // rutas para reservas grupales

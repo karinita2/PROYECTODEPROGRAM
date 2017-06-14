@@ -113,10 +113,16 @@ $("#crpmbutton").click(function() {
                 $('.error').text(data.errors.description);
             } else {
                 $('.error').remove();
-                $('#packtable').append("<tr class='item" + data.id_pack + "'><td>" + data.id_pack + "</td><td>" + data.pack + "</td><td>" + data.price + "</td><td>" + data.description + "</td><td><button class='edit-modal btn btn-info' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-edit'></span> Edit</button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-title='" + data.title + "' data-description='" + data.description + "'><span class='glyphicon glyphicon-trash'></span> Delete</button></td></tr>");
+                $('#packtable').append("<tr class='item" + data.id_pack + "'>" +
+                    "<td>" + data.id_pack + "</td>" +
+                    "<td>" + data.pack + "</td><td>" + data.price + "</td>" +
+                    "<td>" + data.description + "</td>" +
+                    "<td><button class='btn btn-warning btn-detail edit-pack' data-idpack='" + data.id_pack + "' data-pack='" + data.pack + "' data-price='" + data.price + "'><i class='material-icons dp48'>settings</i></button> <button class='waves-effect waves-light btn red delete-pack' data-idpack='" + data.id_pack + "' data-pack='" + data.pack + "' data-price='" + data.price + "'><i class='material-icons dp48'>delete</i></button></td></tr>"
+                + swal("Buen trabajo!", "Se creo correctamente el paquete!", "success"));
             }
         },
     });
     $('#title').val('');
     $('#description').val('');
 });
+
