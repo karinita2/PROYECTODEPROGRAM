@@ -10,6 +10,7 @@
         <div class="col s12">
             <div class="page-title">Habitaciones</div>
         </div>
+        {{print_r($rooms)}}
         <div class="col s12 m12 l12">
             <div class="card">
                 <div class="card-content">
