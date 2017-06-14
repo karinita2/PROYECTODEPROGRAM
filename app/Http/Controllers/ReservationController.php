@@ -120,6 +120,18 @@ class ReservationController extends Controller
     return redirect('/reservations/'.$reservation_id->id_reservation);
     }
 
+    public function availability(Request $request)
+    {
+
+            $data = DB::table('rooms')
+                ->where('availability','available')
+                ->where('quantity',">=",$request->quantity)
+                ->where('room_type_id',$request->room_type_id)
+                ->count();
+
+        return response()->json($data);
+
+    }
 
     public function show()
     {
@@ -133,6 +145,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
     //
+
     }
 
     public function update(Request $request, $id)
