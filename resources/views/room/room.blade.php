@@ -10,7 +10,6 @@
         <div class="col s12">
             <div class="page-title">Habitaciones</div>
         </div>
-        {{print_r($rooms)}}
         <div class="col s12 m12 l12">
             <div class="card">
                 <div class="card-content">
@@ -41,31 +40,19 @@
                         </thead>
 
                         <tbody>
+                        {{print_r($rooms)}}
                         @foreach($rooms as $key )
                             <tr>
-                                <td> {{ $key->id_room }}</td>
-                                <td>{{ $key->name }}</td>
-                                <td>{{ $key->room_type }}</td>
-                                <td>{{ $key->availability }}</td>
-                                <td>
-                                    <button class="btn btn-warning btn-detail edit-modal"
-                                            data-id_room        = "{{ $key->id_room }}"
-                                            data-id_reservation = "{{ $key->id_reservation }}"
-                                            data-ckechout       = "{{ $key->ckechout}}"
-                                            data-ckechin        = "{{ $key->ckechin }}"
-                                            data-name           = "{{ $key->name}}"
-                                            data-room_type      = "{{ $key->room_type }}"
-                                            data-availability   = "{{ $key->availability }}">
-                                        Ver
-                                    </button>
-                                </td>
+                                <td> {{ $key->id }}</td>
+                                <td> {{ $key->task }}</td>
+                                <td> {{ $key->task_description}}</td>
+
+
                             </tr>
                             @extends('modals.viewroom')
                         @endforeach
                         </tbody>
                     </table>
-
-                    {{ $rooms->links() }}
                 </div>
             </div>
         </div>

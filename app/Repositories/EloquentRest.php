@@ -33,22 +33,10 @@ class EloquentRest implements RoomRepository
 
 
         try{
-            $json = file_get_contents('https://checki.herokuapp.com/api/task/1');
+            $json = file_get_contents('https://checki.herokuapp.com/api/tasks');
             $obj = json_decode($json);
-            $array=array();
 
-            foreach (json_decode($json) as $key=>$value)
-            {
-                $array[]=
-                [
-                    'id_room'=>$value->id,
-                    'name'=>$value->name,
-                    'room_type'=>'Prueba',
-                    'availability'=>$value->user_id
-                ];
-            }
-
-            return response()->json($array);
+            return ($obj->data);
         } catch(\Exception $e)
         {
             /*
