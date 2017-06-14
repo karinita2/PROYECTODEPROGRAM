@@ -30,21 +30,22 @@ Route::post('/editUser', 'UserController@edit')->middleware('auth');
 Route::post('/addUser', 'UserController@store')->middleware('auth');
 Route::post('/deleteUser', 'UserController@deleteUser')->middleware('auth');
 
-Route::resource('/reservation','ReservationController');
-Route::get('/reservation', 'ReservationController@index')->middleware('auth');
-Route::get('/reservation/create', 'ReservationController@create');
-Route::post('/reservation/store','ReservationController@store');
-Route::get('/reservationcli','ReservationController@clientreservation');
-Route::post('/reservation/register', 'ReservationController@reservationRegister');
-Route::get('/buscarCliente', 'ReservationController@autocompleteCliente');
-Route::post('/roomsearch', 'ReservationController@searchRooms');
-Route::get('/reservations/{reservation}', 'ReservationController@editReservations');
-Route::post('/addRoom', 'ReservationController@addRoom');
-Route::post('/addServices', 'ReservationController@addServices');
-Route::post('/deleteDetail', 'ReservationController@deleteDetail');
 
-Route::post('/saveReservation', 'ReservationController@saveReservation');
-
+Route::group(['middleware' => 'auth'], function (){
+    Route::resource('/reservation','ReservationController');
+    Route::get('/reservation', 'ReservationController@index');
+    Route::get('/reservation/create', 'ReservationController@create');
+    Route::post('/reservation/store','ReservationController@store');
+    Route::get('/reservationcli','ReservationController@clientreservation');
+    Route::post('/reservation/register', 'ReservationController@reservationRegister');
+    Route::get('/buscarCliente', 'ReservationController@autocompleteCliente');
+    Route::post('/roomsearch', 'ReservationController@searchRooms');
+    Route::get('/reservations/{reservation}', 'ReservationController@editReservations');
+    Route::post('/addRoom', 'ReservationController@addRoom');
+    Route::post('/addServices', 'ReservationController@addServices');
+    Route::post('/deleteDetail', 'ReservationController@deleteDetail');
+    Route::post('/saveReservation', 'ReservationController@saveReservation');
+});
 
 Route::resource('/list','ListController');
 Route::get('/list','ListController@index');

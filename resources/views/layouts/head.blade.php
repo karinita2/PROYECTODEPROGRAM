@@ -554,7 +554,17 @@
                     </div>
                 </li>
                 @endif
-                @if(Auth::user()->role_id=="1" )
+                @if(Auth::user()->role_id=="1")
+                    <li class="no-padding">
+                        <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">library_books</i>Reservas<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="{{ url('/reservationcli') }}">Reservar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                @if(Auth::user()->role_id=="2" )
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">assignment_ind</i>Usuarios<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                     <div class="collapsible-body">
@@ -565,10 +575,9 @@
                     </div>
                 </li>
                 @endif
-                @if(Auth::user()->role_id=="1")
+                @if(Auth::user()->role_id=="2")
                 <li class="no-padding">
                     <a class="collapsible-header waves-effect waves-grey" href="{{ url('/pack') }}"><i class="material-icons">desktop_windows</i>Paquetes<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-
                 </li>
                 @endif
             </ul>
