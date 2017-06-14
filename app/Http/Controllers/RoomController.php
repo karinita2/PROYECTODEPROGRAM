@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Repositories\RoomRepository;
 
 class RoomController extends Controller
 {
+    public function __construct(RoomRepository $roomy)
+    {
+        $this->roomy = $roomy;
+    }
+
     public function index()
     {
 
         /*Conectando las tablas de rooms, room_types, reservations, details para sacar detalles de la habitacion*/
         $search = \Request::get('search');
+        /*
         $rooms = DB::table('rooms')
             ->leftjoin('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
             ->leftjoin('details','rooms.id_room','=','details.room_id')
@@ -22,7 +29,7 @@ class RoomController extends Controller
             ->orderBy('id_room','asc')
             ->paginate(10);
 
-
+*/
         /*
         $search = \Request::get('search');
         $rooms = DB::table('rooms')
@@ -35,6 +42,7 @@ class RoomController extends Controller
             ->paginate(10);
 
         */
+        $rooms= $this->roomy->getRoomTypes($search);
         return view('room.room',compact('rooms'));
     }
     public function create()
