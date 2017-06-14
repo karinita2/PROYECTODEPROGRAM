@@ -11,97 +11,81 @@
     <div class="row">
         <div class="col s12 m12 l7">
             <div class="card">
+                <div class="card-content">
+                    <div class="row">
 
-                    <div class="card-content">
+                        <div class="center"><p><b>DETALLES DE LA RESERVA</b></p></div><br>
                         <div class="row">
-                            <div class="center"><p><b>DETALLES DE LA RESERVA</b></p></div><br>
-                            <div class="row">
 
-                                <div class="col s6 m6 l6">
-                                    <p><b>CLIENTE</b></p>
-                                    <p>Nombre       : <b> {{ $reservation->last_name. ' '.$reservation->name }} </b></p>
-                                    <p>Telefono     :     {{ $reservation->phone}}</p>
-                                    <p>Documento    :     {{ $reservation->ndi }}</p>
-                                    <p>Correo       : <b> {{ $reservation->email }}</b></p>
-                                    <p>Nacionalidad : {{ $reservation->nationality }}</p>
-                                </div>
-                                <div class="col s6 m6 l6 right">
-                                    <p><b>HABITACIONES</b></p>
-                                    <p>Fecha de la reserva: {{ $reservation->date }}</p>
-                                    <p>Check-In : {{ $reservation->ckechin }}</p>
-                                    <p>Check-Out: {{ $reservation->ckechout }}</p>
-                                </div>
+                            <div class="col s6 m6 l6">
+                                <p>Nombre       : <b> {{ $reservation->last_name. ' '.$reservation->name }} </b></p>
+                                <p>Telefono     :     {{ $reservation->phone}}</p>
+                                <p>Documento    :     {{ $reservation->ndi }}</p>
+                                <p>Correo       : <b> {{ $reservation->email }}</b></p>
+                                <p>Nacionalidad : {{ $reservation->nationality }}</p>
                             </div>
-                        </div>
-                        <br>
-                        <div class="center"><p><b>HABITACIONES DE LA RESERVA</b></p></div>
-                        <div class="row">
-                            <div class="row">
-                                <div class="row" id="tableReservation">
-                                    <table id="example" class="display responsive-table datatable-example dataTable" role="grid" aria-describedby="example_info">
-                                        <thead>
-                                        <tr role="row">
-                                            <th rowspan="1" colspan="1" style="width: 50px;">ID</th>
-                                            <th rowspan="1" colspan="1" style="width: 150px;">Habitaciones</th>
-                                            <th rowspan="1" colspan="1" style="width: 70px;">Precio</th>
-                                            <th rowspan="1" colspan="1" style="width: 80px;">Noches</th>
-                                            <th>Extras</th>
-                                            <th rowspan="1" colspan="1" style="width: 100px;">Opciones</th>
-                                            <th rowspan="1" colspan="1" style="width: 100px;">Sub-Total</th>
-                                        </tr>
-                                        </thead>
-                                        <br>
-                                        <?php $total = 0 ?>
-                                        @foreach($details as $detail)
-                                            <?php  $total = $total + $detail->sub_total ?>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">{{$detail->room_id}}</td>
-                                                <td>{{$detail->name}}</td>
-                                                <td>{{$detail->price}}</td>
-                                                <td>{{$detail->nights}}</td>
-                                                <td></td>
-                                                <td>
-                                                    <button class="waves-effect waves-light btn green edit-modal"
-                                                            data-id_reservation    = "{{ $reservation->id_reservation }}"
-                                                            data-id_detail         = "{{ $detail->id_detail }}"
-                                                            data-price             = "{{ $detail->price }}">
-                                                        <i class="material-icons dp48">settings</i>
-                                                    </button>
-                                                    <button class="waves-effect waves-light btn red delete-modal"
-                                                            data-id             = "{{ $detail->id_detail }}"
-                                                            data-id_room         = "{{ $detail->room_id }}">
-                                                        <i class="material-icons dp48">delete</i>
-                                                    </button>
-                                                </td>
-                                                <td>{{$detail->sub_total}}</td>
-                                            </tr>
-                                            @extends('modals.editDetail')
-                                            @extends('modals.deleteDetail')
-                                        @endforeach()
-                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{$reservation->id_reservation}}">
-                                        <input type="hidden" id="id_user" name="id_user" value="{{$reservation->user_id}}">
-                                        <tr>
-                                            <td colspan="6" style="text-align: right"><b>Total:</b></td>
-                                            <td><input type="hidden" id="total" name="total" value="{{$total}}">{{$total}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <form action="{{ url('/saveReservation') }}" method="POST" id="aceptar">
-                                    {{csrf_field()}}
-                                    <input type="hidden" id="total_reservation" name="total_reservation">
-                                    <input type="hidden" id="reservation" name="reservation">
-                                    <input type="hidden" id="user_id" name="user_id">
-                                    <div class="col s12 m12 l12 center">
-                                        <button class="waves-effect waves-light btn green" type="submit" id="aceptar">ACEPTAR</button>
-                                    </div>
-                                </form>
+                            <div class="col s6 m6 l6 right">
+                                <p><b>HABITACIONES</b></p>
+                                <p>Fecha de la reserva: {{ $reservation->date }}</p>
+                                <p>Check-In : {{ $reservation->ckechin }}</p>
+                                <p>Check-Out: {{ $reservation->ckechout }}</p>
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="center"><p><b>HABITACIONES DE LA RESERVA</b></p></div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="row" id="tableReservation">
+                                <table id="example" class="display responsive-table datatable-example dataTable" role="grid" aria-describedby="example_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th rowspan="1" colspan="1" style="width: 50px;">ID</th>
+                                        <th rowspan="1" colspan="1" style="width: 150px;">Habitaciones</th>
+                                        <th rowspan="1" colspan="1" style="width: 70px;">Precio</th>
+                                        <th rowspan="1" colspan="1" style="width: 80px;">Noches</th>
+                                        <th>Extras</th>
+                                        <th rowspan="1" colspan="1" style="width: 100px;">Opciones</th>
+                                        <th rowspan="1" colspan="1" style="width: 100px;">Sub-Total</th>
+                                    </tr>
+                                    </thead>
+                                    <br>
+                                    <?php $total = 0 ?>
+                                    @foreach($details as $detail)
+                                        <?php  $total = $total + $detail->sub_total ?>
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">{{$detail->room_id}}</td>
+                                            <td>{{$detail->name}}</td>
+                                            <td>{{$detail->price}}</td>
+                                            <td>{{$detail->nights}}</td>
+                                            <td>cuna, cama</td>
+                                            <td>
+                                                <button class="waves-effect waves-light btn green edit-modal"
+                                                        data-id_reservation    = "{{ $reservation->id_reservation }}"
+                                                        data-id_detail         = "{{ $detail->id_detail }}"
+                                                        data-price             = "{{ $detail->price }}">
+                                                    <i class="material-icons dp48">settings</i>
+                                                </button>
+                                                <button class="waves-effect waves-light btn red delete-modal"
+                                                        data-id             = "{{ $detail->id_detail }}"
+                                                        data-id_room         = "{{ $detail->room_id }}">
+                                                    <i class="material-icons dp48">delete</i>
+                                                </button>
+                                            </td>
+                                            <td>{{$detail->sub_total}}</td>
+                                        </tr>
+                                            @extends('modals.editAmbiente')
+                                            @extends('modals.deleteDetail')
+                                    @endforeach()
+                                    <tr>
+                                        <td colspan="6" style="text-align: right"><b>Total:</b></td>
+                                        <td>{{$total}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col s12 m12 l5">
@@ -129,10 +113,6 @@
                                 </div>
                                 <div class="input-field col s1 m1 l1">
                                     <input type="hidden" id="role_id" name="role_id" value="{{ Auth::user()->role_id }}">
-                                </div>
-                                <div class="input-field col s5 ">
-                                    <input placeholder="Ingrese cantidad de niños" id="cantidadNino" name="cantidadNino" type="text" class="validate">
-                                    <label for="cantidadNino" class="active">Niños</label>
                                 </div>
                             </div>
                             <div class="input-field col s12 m12 l12">
@@ -181,31 +161,17 @@
             <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 
             <script type="text/javascript">
-                $(document).ready(function(){
-
-                    $("#aceptar").click(function () {
-                        //saco el valor accediendo a un input de tipo text y name = nombre2 y lo asigno a uno con name = nombre3
-                        var total = $("#total").val();
-                        var id_reservation = $("#reservation_id").val();
-                        var id = $('#id_user').val();
-                        $('#total_reservation').val(total);
-                        $('#reservation').val(id_reservation);
-                        $('#user_id').val(id);
-                    });
-                    //var resultado = au - ao;
-                    //  $("#cambio").val($("#total-venda").val());
-                });
                 $(document).on('click', '.edit-modal', function() {
                     $('#id_reservation').val($(this).data('id_reservation'));
                     $('#id_detail').val($(this).data('id_detail'));
                     $('#price').val($(this).data('price'));
-                    $('#modal1').openModal(true);
+                    $('#modal3').openModal(true);
                 });
 
                 $(document).on('click', '.delete-modal', function() {
                     $('#id').val($(this).data('id'));
                     $('#id_room').val($(this).data('id_room'));
-                    $('#modal2').openModal(true);
+                    $('#modal4').openModal(true);
                 });
                 $('.modal-footer').on('click', '.delete', function() {
                     $.ajax({
@@ -277,7 +243,7 @@
                             $("#tableReservation").html("<div class='progress'><div class='indeterminate'></div></div>");
                             $.ajax({
                                 type : "POST",
-                                url : '{!! url('/addRoom') !!}',
+                                url : '{!! url('/addRoom2') !!}',
                                 data : datos,
                                 dataType : 'json',
                                 success : function (data) {

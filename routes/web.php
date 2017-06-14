@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Mail;
+
 /*Route::get('/', function () {
     return view('welcome');
 });*/
@@ -47,18 +49,24 @@ Route::post('/addRoom', 'ReservationController@addRoom');
 Route::post('/addServices', 'ReservationController@addServices');
 Route::post('/deleteDetail', 'ReservationController@deleteDetail');
 
+Route::post('/saveReservation', 'ReservationController@saveReservation');
 
+
+Route::resource('/list','ListController');
 Route::get('/list','ListController@index');
+Route::post('/list/{numero}','ListController@viewReservation');
+
 // ruta de autocomplete
 Route::get('/autocomplete','ReservationController@autocomplete');
 // ruta para adicionar el tipo de habitacion
-Route::post('/addreservation', 'ReservationController@addReservation');
+Route::post('/addreservation', 'ReservationControllemiddleware(\'auth\')r@addReservation');
 Route::get('/pack','PackController@index');
 Route::post('/findUser','UserController@findUser');
 Route::resource('pack','PackController');
 Route::post('/addPack','PackController@store');
 Route::post('/deletePack','PackController@destroy');
 Route::post('/editPack','PackController@update');
+
 // rutas para reservas grupales
 Route::resource('/reservasgrupales','GroupController');
 Route::post('/availability','ReservationController@availability');
@@ -66,3 +74,16 @@ Route::get('/reservasgrupales', 'GroupController@index')->middleware('auth');
 Route::post('/addUser2', 'GroupController@storeEncargado')->middleware('auth');
 Route::get('/buscarEncargado', 'GroupController@autocompleteEncargado');
 Route::post('/groupreservation/store','GroupController@store');
+
+Route::post('/roomsearch2', 'GroupController@searchRooms');
+Route::get('/groupreservations/{reservation}', 'GroupController@editReservations');
+Route::post('/addreservation2', 'GroupController@addReservation');
+Route::post('/addRoom2', 'GroupController@addRoom');
+Route::post('/addAmbientes', 'GroupController@addAmbientes');
+
+
+//ruta perfil usuario
+Route::resource('/profile', 'ProfileController@index');
+Route::get('/editProfile', 'ProfileController@edit');
+
+
