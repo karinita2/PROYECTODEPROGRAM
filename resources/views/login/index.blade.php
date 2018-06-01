@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Bienvenido Empresarial </title>
+    <title> Bienvenido Empresarial Proyecto de Software 2 </title>
 
     <!-- BEGIN META -->
     <meta charset="utf-8">
