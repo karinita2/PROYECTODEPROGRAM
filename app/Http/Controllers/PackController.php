@@ -8,7 +8,7 @@ use DB;
 class PackController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar una lista del recurso.
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +22,7 @@ class PackController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear un nuevo recurso.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class PackController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacenar un recurso recién creado en el almacenamiento.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -51,7 +51,7 @@ class PackController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar el recurso especificado
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -62,7 +62,7 @@ class PackController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar el recurso especificado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class PackController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar el recurso especificado en el almacenamiento.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -99,7 +99,7 @@ class PackController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar el recurso especificado del almacenamiento.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

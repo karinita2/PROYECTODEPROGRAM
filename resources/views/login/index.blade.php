@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Bienvenido Empresarial Proyecto de Software 2 </title>
+    <title> Bienvenido VALENTIN proyecto programacion en red </title>
 
     <!-- BEGIN META -->
     <meta charset="utf-8">
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <br>
-                    <h1 class="text-lg text-bold text-primary">Hotel Empresarial</h1>
+                    <h1 class="text-lg text-bold text-primary">Hotel Valentin</h1>
                     <br>
                     <form class="form floating-label" action="../../html/dashboards/dashboard.html" accept-charset="utf-8" method="post">
                         <div class="form-group">
@@ -74,34 +74,4 @@
                        <b> O</b>
                     </h3>
                     <p>
-                        <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-facebook pull-left"></i>Conectar con Facebook</a>
-                    </p>
-                    <p>
-                        <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-twitter pull-left"></i>Conectar con Twitter</a>
-                    </p>
-                </div><!--end .col -->
-            </div><!--end .row -->
-        </div><!--end .card-body -->
-    </div><!--end .card -->
-</section>
-<!-- END LOGIN SECTION -->
-
-<!-- BEGIN JAVASCRIPT -->
-<script src="../../assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
-<script src="../../assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
-<script src="../../assets/js/libs/bootstrap/bootstrap.min.js"></script>
-<script src="../../assets/js/libs/spin.js/spin.min.js"></script>
-<script src="../../assets/js/libs/autosize/jquery.autosize.min.js"></script>
-<script src="../../assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-<script src="../../assets/js/core/source/App.js"></script>
-<script src="../../assets/js/core/source/AppNavigation.js"></script>
-<script src="../../assets/js/core/source/AppOffcanvas.js"></script>
-<script src="../../assets/js/core/source/AppCard.js"></script>
-<script src="../../assets/js/core/source/AppForm.js"></script>
-<script src="../../assets/js/core/source/AppNavSearch.js"></script>
-<script src="../../assets/js/core/source/AppVendor.js"></script>
-<script src="../../assets/js/core/demo/Demo.js"></script>
-<!-- END JAVASCRIPT -->
-
-</body>
-</html>
+                        <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-facebook pull-left">

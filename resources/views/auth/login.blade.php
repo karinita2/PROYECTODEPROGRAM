@@ -10,7 +10,7 @@
                         <div class="card white darken-1">
 
                                 <div class="card-content ">
-                                    <span class="card-title">Hotel Empresarial</span>
+                                    <span class="card-title">Hotel Valentin</span>
                                     <div class="row">
                                         <form class="col s12" action="{{ url('/login') }}" role="form" accept-charset="utf-8" method="post">
                                             {{ csrf_field() }}

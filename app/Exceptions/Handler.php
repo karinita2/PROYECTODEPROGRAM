@@ -9,7 +9,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that should not be reported.
+     * Una lista de los tipos de excepción que no se deben informar.
      *
      * @var array
      */
@@ -23,7 +23,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
+     * Informar o registrar una excepción.
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
+     * Hacer una excepción en una respuesta HTTP.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Convert an authentication exception into an unauthenticated response.
+     * Convertir una excepción de autenticación en una respuesta no autenticada.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Auth\AuthenticationException  $exception

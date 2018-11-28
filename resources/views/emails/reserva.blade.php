@@ -1,4 +1,4 @@
-<h1>HOTEL EMPRESARIAL</h1><HR>
+<h1>HOTEL VALENTIN</h1><HR>
 
 <p>Reserva registrada correctamen</p>
 <p>codigo de la reserva : <b>{{$codigo }}</b></p>
@@ -9,4 +9,4 @@
 <p>Total : {{$total}} Bs.</p>
 
 <P>GRACIAS POR SU PREFERENCIA</P>
-<small>Sistema de reserva - Ingenieria del software</small>
+<small>Sistema de reserva - Ingenieria Informatica</small>

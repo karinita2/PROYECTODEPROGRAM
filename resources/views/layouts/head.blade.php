@@ -511,7 +511,7 @@
                 @endif
             </ul>
             <div class="footer">
-                <p class="copyright">Ingenieria de software ©</p>
+                <p class="copyright">Ingenieria Informatica ©</p>
                 <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
             </div>
         </div>

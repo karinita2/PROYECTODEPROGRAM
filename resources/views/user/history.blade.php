@@ -13,7 +13,7 @@
         </div>
         <div class="col s12">
             
-            <div class="page-title"><h8>En esta sección podrá ver todas las reservas que usted realizó en el "Hotel Empresarial".</h8></div>
+            <div class="page-title"><h8>En esta sección podrá ver todas las reservas que usted realizó en el "Hotel Valentin".</h8></div>
         </div>
         <div class="col s12 m12 l12">
             <div class="card">
@@ -52,42 +52,4 @@
                                 <td>
                                     <button class="btn btn-warning btn-detail edit-modal"
                                             data-id_reservation       = "{{ $key->id_reservation }}"
-                                            data-date                 = "{{ $key->date }}"
-                                            data-ckechout             = "{{ $key->ckechout}}"
-                                            data-ckechin              = "{{ $key->ckechin }}"
-                                            data-type_reservation     = "{{ $key->type_reservation}}"
-                                            data-total                = "{{ $key->total }}">
-                                        Detalles
-                                    </button>
-                                </td>
-                            </tr>
-                            @extends('modals.viewhistory')
-                        @endforeach
-                        </tbody>
-                            <br>
-                          
-                        </table>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-@endsection
-
-@section('js')
-    <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-    <script src="assets/plugins/materialize/js/materialize.min.js"></script>
-    <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-    <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-    <script src="assets/plugins/google-code-prettify/prettify.js"></script>
-    <script src="assets/plugins/sweetalert/sweetalert.min.js"></script>
-    <script src="assets/plugins/fullcalendar/moment.min.js"></script>
-    <script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
-    <script src="assets/js/alpha.min.js"></script>
-    <script src="assets/js/ajax_history.js"></script>
-    <script src="assets/js/pages/calendar.js"></script>
-
-    <!--<script src="assets/js/pages/miscellaneous-sweetalert.js"></script>-->
-@endsection
+                              

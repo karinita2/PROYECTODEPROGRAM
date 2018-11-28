@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="header">
 				<div class="row">
-					<div class="center"><h3><b>SISTEMA DE RESERVAS - HOTEL EMPRESARIAL</b></h3></div><br>
+					<div class="center"><h3><b>SISTEMA DE RESERVAS - HOTEL VALENTIN</b></h3></div><br>
 				</div>
 			</div>
 			<div class="col s12">
@@ -21,9 +21,9 @@
 							<div class="row">
 								<div class="col s4 m4 l4">
 									<p><b>HOTEL</b></p>
-									<P>Detalle       : <b> Hotel Empresarial ****** </b></P>
+									<P>Detalle       : <b> Hotel Valentin *****</b></P>
 									<P>Telefono     :  +591657321488</P>
-									<P>Correo   :  hotel@empresarial.com</P>
+									<P>Correo   :  hotel@valentin.com</P>
 								</div>
 								<div class="col s4 m4 l4">
 									<p><b>CLIENTE</b></p>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Hotel Empresarial</title>
+    <title>Hotel Valentin</title>
     <meta name="description"
           content="Accomodation is developed for hotels, motels, guest house and accommodation planning like Vacation Rentals, Homes, Apartments & Rooms and much more.">
     <meta name="author" content="Themeinjection.com">
@@ -65,7 +65,7 @@
                 </button>
                 <!--Brand / Logo start-->
                 <a class="navbar-brand scroll-to" href="#page-top">
-                    <img src="assets/webpage/img/logo.png" class="img-responsive" alt="Accommodation Landing Page"/>
+                    
                 </a>
                 <!--Brand / Logo end-->
             </div>
@@ -141,7 +141,7 @@
                     <button class="btn btn-color1 call-to-action-button show-inquiry-modal">
                         <i class="icon-calendar icons"></i> Reservas/Disponibilidad
                     </button>
-                    <a class="call-to-action-phone" href="tel:+13174562564">71123456 - 2480523</a>
+                    <a class="call-to-action-phone" href="tel´+59169383595">69383595 - 2480523</a>
                 </div>
             </div>
         </div>
@@ -498,9 +498,9 @@
                 <div class="col-md-8">
                     <h2>Sobre nosotros</h2>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatisDuis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
-                        elit.</p>
+                    <p>HOTEL VALENTÍN, un servicio de categoría en el sur de Bolivia. Distinguido por excelencia, confort y elegancia, para un huésped ilustre como usted.
+
+Siempre atentos a los detalles nos esforzamos para que nuestros visitantes disfruten de un servicio eficiente,afable,diligente y asi experimenten la hospitalidad chaqueña..</p>
                 </div>
             </div>
         </div>
@@ -618,12 +618,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2><img src="assets/webpage/img/logo.png" alt="Logo"/></h2>
-                    <address>Av. 14 de septiembre Obrajes</address>
+                    <h2><img src="assets/webpage/img/valentin.png" alt="Logo"/></h2>
+                    <address>Av. San Martin entre Sucre/Campero</address>
                     <p class="address-info">Si tiene alguna consulta no dude en llamarnos</p>
                     <ul class="phones">
                         <li><i class="fa fa-phone"></i>2-489092</li>
-                        <li><i class="fa fa-mobile"></i>72501923</li>
+                        <li><i class="fa fa-mobile"></i>69383595</li>
                     </ul>
                 </div>
             </div>
@@ -637,7 +637,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <p class="footer-copyright">
-                        &copy; UCB 1-2017
+                        &copy; karina 26-2018
                     </p>
                 </div>
                 <div class="col-md-6">

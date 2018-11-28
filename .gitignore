@@ -3,8 +3,7 @@
 /storage/*.key
 /vendor
 /.idea
-Homestead.json
-Homestead.yaml
+
 .env
 
 Vagrantfile
@@ -13,4 +12,4 @@ after\.sh
 
 aliases
 
-composer\.json
+composer\.

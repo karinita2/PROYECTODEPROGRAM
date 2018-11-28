@@ -29,7 +29,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear un nuevo recurso.
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -88,16 +88,7 @@ class GroupController extends Controller
         Rooms::where('id_room', $data->id_room)
             ->update(['availability' => 'check-in']);
 
-        /*$details = DB::table('details')
-        ->join('rooms', 'rooms.id_room', '=', 'details.room_id')
-        #->join('room_types', 'room_types.id_room_type', '=', 'rooms.room_type_id')
-        ->where('details.reservation_id', '=', $reservation_id->id_reservation )
-        ->get();
-
-        $reservation = DB::table('reservations')
-        ->join('users', 'users.id', '=', 'reservations.user_id')
-        ->where('reservations.id_reservation', '=', $reservation_id->id_reservation)
-        ->get();*/
+        
         return redirect('/groupreservations/'.$reservation_id->id_reservation);
     }
 

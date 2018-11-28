@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>HOTEL EMPRESARIAL</title>
+        <title>HOTEL VALENTIN</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -79,11 +79,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    HOTEL EMPRESARIAL
+                    HOTEL VALENTIN
                 </div>
 
                 <div class="links">
-                    <a>Bievenido a reservas del hotel empresarial.</a>
+                    <a>Bievenido a reservas del hotel valentin.</a>
                 </div>
             </div>
         </div>
